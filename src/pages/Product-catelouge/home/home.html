@@ -1,0 +1,119 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>
+		<!-- <img class="logo " style="background:red;" src="http://www.thehitechgears.com/Content/images/logo.png" alt="">			 -->
+			<img class="logo" src="assets/imgs/Kenshin-Logo.svg" alt="">
+		</ion-title>
+		<ion-buttons end class="login-btn" (click)='gotoLoginPage()'>
+			<button ion-button>
+				<img src="assets/icons/logout-ic-active.svg" alt="">
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	
+	<!-- <div class="top-img">
+		<img src="assets/imgs/home-img.png" alt="">
+	</div> -->
+	<ion-slides autoplay="3000" loop="true" speed="500" pager="true">
+		<ion-slide>
+			<img src="assets/imgs/slider-1.png" alt="">
+		</ion-slide>
+		<ion-slide>
+			<img src="assets/imgs/slider-2.png" alt="">
+		</ion-slide>
+		<ion-slide>
+			<img src="assets/imgs/slider-3.png" alt="">
+		</ion-slide>
+	</ion-slides>
+	
+	<div class="catelouge-homelist">
+		<button ion-item (click)="SeeCataloguelist()" class="animated bounceInLeft">
+			<div class="thumb">
+				<div class="outer">
+					<div class="innear">
+						<img src="assets/icons/icon-catlouge.svg" alt="">
+					</div>
+				</div>
+			</div>
+			<div class="description">
+				<div class="outer">
+					<div class="innear">
+						<h2>Product Catalogue</h2>
+						<p>Our Products</p>
+						<ion-icon name="ios-arrow-forward-outline"></ion-icon>
+					</div>
+				</div>
+			</div>
+		</button>
+		<button ion-item (click)="SeeNewArrivallist()" class="animated bounceInRight">
+			<div class="thumb">
+				<div class="outer">
+					<div class="innear">
+						<img src="assets/icons/icon-newarrivals.svg" alt="">
+					</div>
+				</div>
+			</div>
+			<div class="description">
+				<div class="outer">
+					<div class="innear">
+						<h2>New Arrivals</h2>
+						<p>New Products Launch</p>
+						<ion-icon name="ios-arrow-forward-outline"></ion-icon>
+					</div>
+				</div>
+			</div>
+		</button>
+		<button ion-item (click)="SeeAboutus()" class="animated bounceInLeft">
+			<div class="thumb">
+				<div class="outer">
+					<div class="innear">
+						<img src="assets/icons/icon-aboutus.svg" alt="">
+					</div>
+				</div>
+			</div>
+			<div class="description">
+				<div class="outer">
+					<div class="innear">
+						<h2>About Us</h2>
+						<p>About Kenshjn IT Solution</p>
+						<ion-icon name="ios-arrow-forward-outline"></ion-icon>
+					</div>
+				</div>
+			</div>
+		</button>
+		<button ion-item (click)="GoOnSearch()" class="animated bounceInRight">
+			<div class="thumb">
+				<div class="outer">
+					<div class="innear">
+						<img src="assets/icons/icon-search.svg" alt="">
+					</div>
+				</div>
+			</div>
+			<div class="description">
+				<div class="outer">
+					<div class="innear">
+						<h2>Search</h2>
+						<p>Search By Category & Product</p>
+						<ion-icon name="ios-arrow-forward-outline"></ion-icon>
+					</div>
+				</div>
+			</div>
+		</button>
+	</div>
+
+
+	
+
+	<button type="button" (click)="getLocation()" >getAppName</button>
+
+
+
+
+	{{data}}
+
+
+	
+</ion-content>

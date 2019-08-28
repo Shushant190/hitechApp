@@ -1,0 +1,51 @@
+<ion-header class="catalogue-header">
+	<ion-navbar>
+		<ion-title>Pawan Sharma / Payments</ion-title>
+		<!-- <ion-buttons end class="login-btn">
+			<button ion-button>
+			</button>
+		</ion-buttons> -->
+		<ion-buttons end class="login-btn" (click)="presentPopover($event)">
+			<button ion-button>
+				<img class="w4 h16" src="assets/icons/more-option-ic.svg" alt="">
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	
+	<div class="list">
+		<div class="box payment">
+			<div class="heading">
+				<p class="code">#8475412</p>
+				<h1>12 Dec 2019</h1>
+			</div>
+			<div class="description">
+				<a class="cust-name">Rahul Verma</a>
+				<p class="type" style="top: 5px !important;">CASH</p>
+				<div class="paragraph">
+					<p class="black-clr line-height-22"><strong>Description</strong>  :  The type of leave that is granted for short durations and can ordinarily be taken with prior information to the employer except in cases when informing the employer is</p>
+				</div>
+			</div>
+		</div>
+		<div class="box payment">
+			<div class="heading">
+				<p class="code">#8475412</p>
+				<h1>12 Dec 2019</h1>
+			</div>
+			<div class="description">
+				<a class="cust-name">Vijay Verma</a>
+				<p class="type" style="top: 5px !important;">CASH</p>
+				<div class="paragraph">
+					<p class="black-clr line-height-22"><strong>Description</strong> : The type of leave that is granted for shortdurations and can ordinarily be taken with prior information to the employer except in cases when informing the employer is</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<ion-fab right bottom (click)="addPayment()">
+		<button ion-fab color="theme"><ion-icon name="add"></ion-icon></button>
+	</ion-fab>
+	
+</ion-content>

@@ -1,0 +1,137 @@
+<ion-header class="catalogue-header">
+  <ion-navbar>
+    <ion-title>Add To Cart</ion-title>
+    <!-- <ion-buttons end class="login-btn" (click)="goToCart()">
+      <button ion-button>
+        <img class="w22 h22" src="assets/icons/cart.svg">
+      </button>
+    </ion-buttons>
+    <ion-buttons end class="login-btn" (click)="leadOptionPopover($event)">
+      <button ion-button>
+        <img class="w4 h16" src="assets/icons/more-option-ic.svg" alt="">
+      </button>
+    </ion-buttons> -->
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="m16">
+    <ul class="collapsible mb4">
+      <li class="active">
+        <div class="collapsible-header">Order Summary</div>
+        <div class="collapsible-body pb0">
+            <div class="table-box">
+              <table>
+                <tr>
+                  <th>Total Quantity</th>
+                  <td>{{cartArr ? cartArr.totalQty : 0}}</td>
+                </tr>
+                <tr>
+                  <th>Basic Total</th>
+                  <td>₹ {{cartArr ? cartArr.subTotal : 0}}</td>
+                </tr>
+                <tr>
+                  <th>GST</th>
+                  <td>₹ {{cartArr ? cartArr.gstAmount : 0}}</td>
+                </tr>
+                <tr>
+                  <th>Grand Total</th>
+                  <td>₹ {{cartArr ? cartArr.grandTotal : 0}}</td>
+                </tr>
+              </table>
+            </div>
+        </div>
+      </li>
+      
+      <li>
+        <div class="collapsible-header">Credit Info</div>
+        <div class="collapsible-body pb0 ">
+            <div class="table-box">
+              <table>
+                <tr>
+                  <th>Limits</th>
+                  <td>₹ {{distributorDetail.creditLimit}}</td>
+                </tr>
+                <tr>
+                  <th>Used</th>
+                  <td>₹ 0</td>
+                </tr>
+                <tr>
+                  <th>Balanced</th>
+                  <td>₹ 0</td>
+                </tr>
+              </table>
+            </div>
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header">Target Info</div>
+        <div class="collapsible-body pb0">
+            <div class="table-box">
+              <table>
+                <tr>
+                  <th class="w50">{{allMonthArr[currentMonth-1]}} Target</th>
+                  <td class="w50">₹ {{currentMonthTarget['targetLimit']}}</td>
+                </tr>
+                <tr>
+                  <th class="w50">Achived</th>
+                  <td class="w50">₹ {{currentMonthTarget['targetAchieved']}}</td>
+                </tr>
+                <tr>
+                  <th class="w50">Balanced</th>
+                  <td class="w50">₹ {{currentMonthTarget['targetBalanced']}}</td>
+                </tr>
+              </table>
+          </div>
+        </div>
+      </li>
+      
+    </ul>
+  </div>
+  <div class="table-list">
+    
+    <div class="cs-heading">
+      <p class="subject">PRODUCT IN CART</p>
+    </div>
+    
+    <div class="table-head">
+      <table>
+        <tr>
+          <th>Category</th>
+          <th class="w80 text-center">Items</th>
+          <th class="w110 text-right">Order</th>
+        </tr>
+      </table>
+    </div>
+    
+    <div class="table-body">
+      <table>
+        <tr *ngFor="let list of orderCatArr">
+          <td><a (click)="goToAddorderDetailModel(list.category)">{{list.category}}</a></td>
+          <td class="w80 text-center">{{list.totalQty}}</td>
+          <td class="w110 text-right">₹ {{list.totalAmount}}</td>
+        </tr>
+      </table>
+    </div>
+    
+  </div>
+  
+  
+  <!-- <ion-list class="sales-seltion-field">
+    
+    <ion-item class="border-none mt0">
+      <ion-label class="black-clr" floating>Remark</ion-label>
+      <ion-textarea class="border-1px pl10" name="remarks" rows="3" cols="3" type="text" required></ion-textarea>
+    </ion-item>
+    
+  </ion-list> -->
+  
+</ion-content>
+
+<ion-footer padding>
+  <div class="full-width-btn cs-display">
+    <button class="wp100 half-width btn-radius" ion-button color="secondary" (click)="saveOrderHandler()">Place Order</button>
+    
+  </div>    
+</ion-footer>

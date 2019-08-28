@@ -1,0 +1,158 @@
+<ion-header class="catalogue-header">
+	<ion-navbar>
+		<ion-title>Order Detail</ion-title>
+		<ion-buttons end class="login-btn">
+			<button ion-button>
+			</button>
+		</ion-buttons>
+		<!-- <ion-buttons end class="login-btn" (click)="presentPopover($event)">
+			<button ion-button>
+				<img class="w4 h16" src="assets/icons/more-option-ic.svg" alt="">
+			</button>
+		</ion-buttons> -->
+	</ion-navbar>
+</ion-header>
+
+<ion-content>	
+	<div class="list">
+		<div class="box light-red-bg relative" (click)="seeDistDetail()">
+			<div class="heading border-none">
+				<div class="dist-name dflex">
+					<div class="first-leter w50" style="background: rgb(46, 175, 100);">{{orderDetail?.establishment ? orderDetail?.establishment[0] : ''}} </div>
+
+					<div class="top-content">
+							<h2>{{orderDetail.establishment}}</h2>
+							<a>{{orderDetail.orderNumber}}</a>
+						</div>
+				</div>
+			</div>
+			
+			<div class="figure-outer mb6">
+				<div class="figure-innear dflex bg-white">
+					<div class="cs-figure ">
+						<p>Contact Person</p>
+						<p>{{orderDetail.createdByName}}</p>
+					</div>
+					<!-- <div class="cs-figure border-left ">
+						<p>Mobile No.</p>
+						<p>9876543210</p>
+					</div> -->
+					
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	
+	<div padding-horizontal class="mt16">
+		<div class="figure-outer mb16">
+			<div class="heading-text m0">
+				<p>Status Information</p>
+			</div>
+			<div class="figure-innear dflex">
+				<div class="cs-figure approved">
+					<p>Dealer Status</p>
+					
+					<p *ngIf="orderDetail.dealerStatus=='1'">Draft</p>
+					<p *ngIf="orderDetail.dealerStatus=='2'">Pending</p>
+					<p *ngIf="orderDetail.dealerStatus=='3'">Approved</p>
+				</div>
+				<div class="cs-figure border-left pending">
+					<p>Company Status</p>
+					<p *ngIf="orderDetail.companyStatus=='1'">Pending</p>
+					<p *ngIf="orderDetail.companyStatus=='2'">Approved</p>
+					<p *ngIf="orderDetail.companyStatus=='3'">Hold</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div padding-horizontal class="mt32">	
+		<div class="cs-list">
+			<div class="list-data flat-item">
+				<div class="figure top-child padding0">
+					<div class="heading-text mb0">
+						<p>Order Information</p>
+					</div>
+					<ul>
+						<li class="wp100">
+							<span>Order No.</span>
+							<p>{{orderDetail.orderNumber}}</p>
+						</li>
+						<li>
+							<span>Date</span>
+							<p>{{orderDetail.createdOn| date}}</p>
+						</li>
+						<li>
+							<span>Amount (₹)</span>
+							<p>₹ {{orderDetail.amount}}</p>
+						</li>
+						<li>
+							<span>Quantity</span>
+							<p>{{orderDetail.quantity}}</p>
+						</li>
+						<li>
+							<span>GST Amount</span>
+							<p>₹ {{orderDetail.gstAmount}}</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="table-list mt32">
+		<div class="heading-text mb0 pl16 pr16">
+			<p>Product Information</p>
+		</div>
+		<div class="table-head">
+			<table>
+				<tr>
+					<th>Category</th>
+					<th class="w100 text-center">Items</th>
+				</tr>
+			</table>
+		</div>
+		<div class="table-body">
+			<table>
+				<tr *ngFor="let a of categoryArr">
+					<td (click)="goToAddorderDetailModel(a.category)" ><a>
+						{{a.category | titlecase }}
+					</a>
+				</td>
+				<td class="w100 text-center">{{a.productArray.length}} </td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<div padding-horizontal class="mt32">
+	<div class="cs-list">
+		<div class="list-data flat-item">
+			<div class="figure top-child padding0">
+				<div class="heading-text mb0">
+					<p>Shipping Information</p>
+				</div>
+				<ul>
+					<li class="wp100">
+						<span>Address</span>
+						<p>{{orderDetail.street | titlecase }}, {{orderDetail.state | titlecase }},{{orderDetail.city | titlecase  }},{{orderDetail.district | titlecase }},{{orderDetail.pin}}</p>
+					</li>
+					<!-- <li>
+						<span>Shop N0.</span>
+						<p>123456</p>
+					</li> -->
+					<!-- <li>
+						<span>Mobile N0.</span>
+						<p>9876543210</p>
+					</li> -->
+					<!-- <li class="wp100">
+						<span>Email</span>
+						<p>pawansharma01@gmail.com</p>
+					</li> -->
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="h50"></div>
+</ion-content>

@@ -1,0 +1,46 @@
+page-home {
+    
+    ion-slides
+    {
+        height: 198px;
+        
+        ion-slide
+        {
+            img
+            {
+                // height: 160px !important;
+                // margin-top: -35px;
+                width: 100% !important;
+            }
+        }
+        
+        .swiper-pagination-bullets
+        {
+            right: 0;
+            left: 76% !important;
+            bottom: 10px;
+            width: 80px !important;
+        }
+        
+        .swiper-pagination-bullet-active 
+        {
+            background: $theme !important;
+            width: 24px !important;
+            border-radius: 50px;
+            
+        }
+        .swiper-pagination-bullet
+        {
+            width: 10px;
+            height: 10px;
+            background: #ffffff;
+            border: 2px solid $theme;
+            opacity: 1;
+            border-radius: 50px;
+            box-shadow: 0px 3px 6px 0px #00000061;
+            -webkit-transition: width 2s; /* For Safari 3.1 to 6.0 */
+            transition: width 2s;
+        }
+    }
+    
+}

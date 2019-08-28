@@ -1,0 +1,143 @@
+<!--
+  Generated template for the DvrDetailPage page.
+  
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="catalogue-header">
+  
+  <ion-navbar>
+    <ion-title>DVR Detail</ion-title>
+  </ion-navbar>
+  
+</ion-header>
+
+
+<ion-content>
+  
+  <div class="cs-list">
+    <div class="list-data flat-item">
+      <div class="info-box">
+        <span class="name-counter">{{title}}</span>
+        <div class="detail-box">
+          <h2 *ngIf="dvr_detail.establishmentName!=''">{{dvr_detail.establishmentName |titlecase }}</h2>
+          <h2 *ngIf="dvr_detail.otherCustomer!=''">{{dvr_detail.otherCustomer |titlecase}}</h2>
+          <h2 *ngIf="dvr_detail.leadEstablishment!=''">{{dvr_detail.leadEstablishment |titlecase}}</h2>
+          <p class="pl25"><i class="material-icons fix-icon">phone</i>{{dvr_detail.mobile}}</p>
+        </div>
+      </div>
+      
+      <div class="description">
+        <h2>Location</h2>
+        <p>{{dvr_detail.location |titlecase}}</p>
+      </div>
+      
+      <div class="figure pt0">
+        <div class="heading-text m0" >
+          <p>Basic Details</p>
+        </div>
+        <ul>
+          <li>
+            <span>Date </span>
+            <p>{{dvr_detail.checkInTime|date}}</p>
+          </li>
+          
+          <li>
+            <span>Company Name</span>
+            <p  *ngIf="dvr_detail.referenceId!=0">{{dvr_detail.establishment |titlecase}}</p>
+            <p  *ngIf="dvr_detail.referenceId==0">{{dvr_detail.establishmentName  |titlecase}}</p>
+          </li>
+          
+          <li>
+            <span>Type</span>
+            <p>{{dvr_detail.activityModuleName |titlecase}}</p>
+          </li>
+          
+          <li>
+            <span>Duration </span>
+            <p>{{dvr_detail.checkinDuration |titlecase}}</p>
+          </li>
+          <li>
+            <span>CheckIn Date</span>
+            <p>{{dvr_detail.checkInTime|date :'dd-MMM-yyyy '}}</p>
+          </li>
+          <li>
+            <span>CheckIn Time</span>
+            <p>{{dvr_detail.checkInTime|date :'h:mm:ss a'}}</p>
+          </li>
+          <li>
+            <span>CheckOut Time</span>
+            <p>{{dvr_detail.checkOutTime|date :'h:mm:ss a'}}</p>
+          </li>
+          
+          <li>
+            <span>Visit Objective</span>
+            <p>{{dvr_detail.objectivesOfVisitName |titlecase}}</p>
+          </li>
+          
+          <li *ngIf="dvr_detail.objectivesOfVisitName=='Others'">
+            <span>Other Objective</span>
+            <p>{{dvr_detail.otherObjective  |titlecase}}</p>
+          </li>
+          
+        </ul>
+      </div>
+      
+      <div class="figure"  *ngIf="dvr_detail.isFollowUp==true">
+        <div class="heading-text m0" >
+            <p>Follow Ups</p>
+          </div>
+        <ul *ngFor="let check of dvr_detail.activityFollowUps">
+          <li>
+            <span>Date </span>
+            <p>{{check.followUpDate|date:'d MMM y'}}</p>
+          </li>
+          <li>
+            <span>Follow-up type</span>
+            <p *ngIf="check.followUpType==1">Call</p>
+            <p *ngIf="check.followUpType==2">Meeting</p>
+            <p *ngIf="check.followUpType==3">Email</p>
+            <p *ngIf="check.followUpType==5">Other</p>
+          </li>
+          <li>
+            <span>Remarks </span>
+            <p>{{check.remarks}}</p>
+          </li>  
+          <li>
+            <span>Status </span>
+            <p *ngIf="check.isClosed==true">Closed</p><p *ngIf="check.isClosed==false">Open</p>
+          </li>        
+        </ul>
+      </div>
+      <div class="figure pb0" *ngIf="dvr_detail.isFollowUp==false && dvr_detail.nextFollowUpType==5">
+        <div class="heading-text m0" >
+            <p>Follow Ups</p>
+          </div>
+        <ul>
+          <li>
+            <span>Follow-up Type</span>
+            <p>Other</p>
+          </li>
+        </ul>
+      </div>
+      
+      
+      
+      <div class="figure pt0" style="margin-top: -20px;">
+        <ul>
+          <li class="wp100" style="margin-top: -1px !important;">
+            <span>Remarks</span>
+            <p> {{dvr_detail.remarks |titlecase}}</p>
+          </li>
+          
+        </ul>
+      </div>
+      <!-- <div class="description">
+        <span>Remarks</span>
+        <p> {{dvr_detail.remarks}}</p>
+      </div> -->
+      
+    </div>
+  </div>
+  <div class="h50"></div>
+</ion-content>

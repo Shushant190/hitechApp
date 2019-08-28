@@ -1,0 +1,539 @@
+<!--
+  Generated template for the ExpensesDetailsPage page.
+  
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="catalogue-header">
+  
+  <ion-navbar>
+    <ion-title>Expenese Detail </ion-title>
+  </ion-navbar>
+  
+</ion-header>
+
+
+<ion-content >
+
+
+
+
+  
+  <div class="action-btn-2" style="background: #f8f8f8; border-bottom: 3px solid #ccc; top: 0px;">
+    <div class="custumer-info">
+      <h2>{{expenseDetailList.expenseSanctionerName}}</h2>
+      <span class="amount">₹ {{expenseDetailList.actualExpenseAmount}}</span>
+    </div>
+  </div>
+  
+  <div class="cs-list m16">
+    <div class="list-data flat-item">
+      <div class="figure  padding0">
+        <ul>
+          <li>
+            <span>Expense Type</span>
+            <p>Sales Promotion</p>
+          </li>
+          <li>
+            <span>Purpose Of Visit</span>
+            <p>{{expenseDetailList.purposeOfVisit}}</p>
+          </li>
+          
+          
+          <li>
+            <span>Amount</span>
+            <p>{{expenseDetailList.actualExpenseAmount}}</p>
+          </li>
+          
+          
+          <li>
+            <span>Date</span>
+            <p>{{expenseDetailList.createdOn | date: ' dd MMM yyyy' }}</p>
+          </li>
+          <li class="wp100" style="border: 1px solid #ccc; border-top: 0px;">
+            <span>E.C. No</span>
+            <p>{{expenseDetailList.ecNumber}}</p>
+          </li>
+          <li>
+            <span>Department</span>
+            <p>{{expenseDetailList.department}}</p>
+          </li>
+          <li class="compelete">
+            <span>Status </span>
+            <p  *ngIf="expenseDetailList.status==2">Pending</p>
+            <p  *ngIf="expenseDetailList.status==5">Approved</p>
+            <p  *ngIf="expenseDetailList.status==6">Reject</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="step-3 ul-clear" *ngIf="expenseDetailList.status!=5  && mystatus == 2" >
+    <!-- " *ngIf="expenseList.createdBy!=userId && (expenseList.status==2|| expenseList.status==3)" -->
+    <div class="sales-seltion-field mt0 m16"  >
+      
+      <ion-item class="mt0">
+        <ion-label>Select Status</ion-label>
+        <ion-select name = "status" [(ngModel)]="data.status">
+          <ion-option disabled="">Select</ion-option>
+          <ion-option value="3">Approve</ion-option>
+          <ion-option value="4">Reject</ion-option>
+        </ion-select>
+      </ion-item>
+      
+      <!-- <ion-item>
+        <ion-label>Select Status</ion-label>
+        <ion-select name="expenseSanctionRejectedBy" [(ngModel)]="data.expenseSanctionRejectedBy">
+          <ion-option disabled="">Select</ion-option>
+          <ion-option value="{{a.leaveApprover}}"   *ngFor="let a of financeUserList ">{{a.userName}}</ion-option>
+          
+        </ion-select>
+      </ion-item> -->
+      
+      <ion-item class="border-none left10 mt0" *ngIf=" data.status == 4">
+        <ion-label class="black-clr" floating>Remark</ion-label>
+        <ion-textarea class="border-1px pl10" name="remark" [(ngModel)]="data.remark"></ion-textarea>
+      </ion-item>
+    </div>
+    <div class="cs-btn border-none m16 mt0 right-btn">
+      <button ion-button color="secondary" round  (click)="statusUpdate()">Update</button>
+    </div>
+  </div>
+  
+  <div class="cs-file-multiple m16">
+    <div class="heading-text m0">
+      <p>Expenese Bill</p>
+    </div>
+    <ul>
+      <li *ngFor="let expenseImage of expenseDetailList.documents;let i=index" crollX="true" scrollY="true" zoom="true"   >
+        <label>
+          <img  src ="{{api+expenseImage.documentId+'/'+'2'}}">
+          <a class="close dowload" matRipple matTooltip="Download Bill" href="{{api+expenseImage.documentId+'/'+'2'}}" ><i class="material-icons">cloud_download</i></a>
+        </label>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ==================================STARTING  OF OUTSTATION BLOCK ======================= -->
+  <div id ="OUTSTATION" *ngIf="foodLength !=0 || miscLength !=0 ||hotelLength !=0 ||localLength !=0 ||travelLength !=0 "   >
+    
+    
+    <div class="cs-list m16" >
+      <div class="list-data flat-item"  *ngIf="foodLength !=0">
+        <div class="figure  padding0">
+          foodExpenses
+          <ul *ngFor="let a of foodExpenses">
+            <li>
+              <span>Date Of Visit </span>
+              <p>  {{ a.date  |date: ' dd MMM yyyy'}}</p>
+            </li>
+            
+            <li>
+              <span>city </span>
+              <p>  {{ a.city}}</p>
+            </li>
+            
+            <li>
+              <span>billAmount </span>
+              <p>  {{ a.billAmount}}</p>
+            </li>
+            
+            <li>
+              <span>tax </span>
+              <p>  {{ a.tax}}</p>
+            </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="cs-list m16"  *ngIf="localLength !=0">
+      <div class="list-data flat-item"  *ngFor="let outTravel of outStationLocalExp">
+        Local Expense
+        <div class="figure  padding0" >
+          <ul >
+            <li>
+              <span>Date Of Visit </span>
+              <p>  {{outTravel.date |date:'EEEE, MMMM d, y'}}</p>
+            </li>
+            
+            <li>
+              <span>from </span>
+              <p>  {{outTravel.from}}</p>
+            </li>
+            
+            <li>
+              <span>to </span>
+              <p>  {{outTravel.to}}</p>
+            </li>
+            
+            <li>
+              <span>Modal Of Travel </span>
+              
+              <p *ngIf="outTravel.modeOfTravel==10">AUTO</p>
+              <p *ngIf="outTravel.modeOfTravel==1">BUS</p>
+              <p *ngIf="outTravel.modeOfTravel==6"> AC TAXI</p>
+              <p *ngIf="outTravel.modeOfTravel==7">NON-AC TAXI</p>
+              <p *ngIf="outTravel.modeOfTravel==8">TWO WHEELER</p>
+              <p *ngIf="outTravel.modeOfTravel==5">METRO</p>
+            </li>
+            
+            <li>
+              <span>fare </span>
+              <p>  {{outTravel.fare}}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="cs-list m16">
+      <div class="list-data flat-item" *ngIf="travelLength !=0">
+        Travel Expense
+        <div class="figure  padding0">
+          <ul *ngFor="let travelExp of outStationTravelExp">
+            <li>
+              <span>Date Of Depature </span>
+              <p>  {{travelExp.departureTime |date:'medium'}}</p>
+            </li>
+            <li>
+              <span>DepartureStation </span>
+              <p>  {{travelExp.departureStation}}</p>
+            </li>
+            <li>
+              <span>Date of Arrival </span>
+              <p>  {{travelExp.arrivalTime |date:'medium'}}</p>
+            </li>
+            <li>
+              <span>arrivalStation </span>
+              <p>  {{travelExp.arrivalStation}}</p>
+            </li>
+            <li>
+              <span>Mode Of Travel  </span>
+              <p *ngIf="travelExp.modeOfTravel==1">BUS</p>
+              <p *ngIf="travelExp.modeOfTravel==2">TRAIN</p>
+              <p *ngIf="travelExp.modeOfTravel==3">AIRLINE</p>
+              <p *ngIf="travelExp.modeOfTravel==5">TEXI</p>
+            </li>
+            <li>
+              <span>class </span>
+              <p>  {{travelExp.class}}</p>
+            </li>
+            
+            
+            <li>
+              <span>ticketNo </span>
+              <p>  {{travelExp.ticketNo}}</p>
+            </li>
+            
+            <li>
+              <span>amount </span>
+              <p>  {{travelExp.amount}}</p>
+            </li>
+            
+            <li>
+              <span>tax </span>
+              <p>  {{travelExp.tax}}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="cs-list m16" *ngIf="hotelLength !=0">
+      Hotel Expense
+      <div class="list-data flat-item">
+        <div class="figure  padding0" *ngFor="let hotelExp of outStationHotelExp">
+          <ul >
+            <li>
+              <span>CheckInDate </span>
+              <p>  {{hotelExp.checkInDate|date:'EEEE, MMMM d, y'}}</p>
+            </li>
+            
+            
+            <li>
+              <span>checkOutDate </span>
+              <p>  {{hotelExp.checkOutDate|date:'EEEE, MMMM d, y'}}</p>
+            </li>
+            
+            
+            <li>
+              <span>city </span>
+              <p>  {{hotelExp.city}}</p>
+            </li>
+            
+            
+            <li>
+              <span>hotelName </span>
+              <p>  {{hotelExp.hotelName}}</p>
+            </li>
+            <li>
+              <span>billAmount </span>
+              <p>  {{hotelExp.billAmount}}</p>
+            </li>
+            
+            <li>
+              <span>tax </span>
+              <p>  {{hotelExp.tax}}</p>
+            </li>
+            
+            <li>
+              <span>remarks </span>
+              <p>  {{hotelExp.remarks}}</p>
+            </li>
+            
+            
+          </ul>
+          
+        </div>
+      </div>
+    </div>
+    <div class="cs-list m16" *ngIf="miscLength !=0" >
+      Misc Expense
+      <div class="list-data flat-item">
+        <div class="figure  padding0">
+          <ul *ngFor="let misc of miscExpenses">
+            <li>
+              <span>CheckInDate </span>
+              <p>  {{misc.date|date:'EEEE, MMMM d, y'}}</p>
+            </li>
+            
+            <li>
+              <span>nature Of Exp </span>
+              <p *ngIf="misc.miscActivityType==1" class="w200">Entertainment Expenses</p>
+              <p *ngIf="misc.miscActivityType==2" class="w200">Gift To Dealers</p>
+              <p *ngIf="misc.miscActivityType==3" class="w200">Lunch/Dinner With Team</p>
+              <p *ngIf="misc.miscActivityType==4" class="w200">Training Program</p>
+              <p *ngIf="misc.miscActivityType==5" class="w200"> Other</p>
+            </li>
+            
+            <li>
+              <span>Beneficiaries Name</span>
+              <p>{{misc.nameOfBeneficiary}}</p>
+            </li>
+            
+            
+            <li>
+              <span> amount</span>
+              <p>{{misc.amount|currency: 'INR':true}}</p>
+            </li>
+            
+            <li>
+              <span>tax</span>
+              <p>{{misc.tax|currency: 'INR':true}}</p>
+            </li>
+            
+            
+            <li>
+              <span>remarks</span>
+              <p>{{misc.remarks|currency: 'INR':true}}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+  </div>  
+  <!-- ==================================ENDING OF OUTSTATION BLOCK ======================= -->
+  <!-- =========================STARTING OF MISCELLENOUS EXPENSE====================== -->
+  <div class="cs-list m16" >
+    <div class="list-data flat-item"  *ngIf="expLength !=0">
+      <div class="figure  padding0">
+        Miscellenous Expense 
+        <ul *ngFor="let a of miscExpense">
+          <li>
+            <span>Date </span>
+            <p>  {{ a.date  |date: ' dd MMM yyyy'}}</p>
+          </li>
+          
+          <li>
+            <span>Amount </span>
+            <p>  {{ a.amount }}</p>
+          </li>
+          
+          <li>
+            <span>NameOfBeneficiary </span>
+            <p>  {{ a.nameOfBeneficiary }}</p>
+          </li>
+          
+          
+          <li>
+            <span>PlaceOfExpense </span>
+            <p>  {{ a.placeOfExpense }}</p>
+          </li>
+          
+          <li>
+            <span>Remarks </span>
+            <p>  {{ a.remarks }}</p>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- =========================ENDING  OF MISCELLENOUS EXPENSE====================== -->
+  
+  <!-- ====================================STARTING OF localConveyances============== -->
+  <div class="cs-list m16"  *ngIf="localExp !=0"> 
+    <div class="list-data flat-item"  >
+      <div class="figure  padding0">
+        Local Conveyances
+        <ul *ngFor="let a of localExp">
+          <li>
+            <span>visitDate </span>
+            <p>  {{ a.visitDate  |date: ' dd MMM yyyy'}}</p>
+          </li>
+          
+          
+          <li>
+            <span>To </span>
+            <p>  {{ a.to}}</p>
+          </li>
+          
+          <li>
+            <span>Tax </span>
+            <p>  {{ a.tax}}</p>
+          </li>
+          
+          <li>
+            <span>Remarks </span>
+            <p>  {{ a.remarks}}</p>
+          </li>
+          <li>
+            <span>Other Expense </span>
+            <p>  {{ a.otherExpense}}</p>
+          </li>
+          <li>
+            <span>modeOfTravel </span>
+            <p *ngIf="a.modeOfTravel==10">AUTO</p>
+            <p *ngIf="a.modeOfTravel==1">BUS</p>
+            <p *ngIf="a.modeOfTravel==6"> AC TAXI</p>
+            <p *ngIf="a.modeOfTravel==7">NON-AC TAXI</p>
+            <p *ngIf="a.modeOfTravel==8">TWO WHEELER</p>
+            <p *ngIf="a.modeOfTravel==5">METRO</p>
+          </li>
+          <li>
+            <span>From</span>
+            <p>  {{ a.from}}</p>
+          </li>
+          <li>
+            <span>Distance</span>
+            <p>  {{ a.distanceKMS}}KMS</p>
+          </li>
+          
+          <li>
+            <span>Amount</span>
+            <p>  {{ a.amount}}</p>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </div> 
+  <!-- ====================================ENDING OF localConveyances============== -->
+  <!-- ========================= STARTING OF salesPromotionExps ========================-->
+  <div class="cs-list m16"  *ngIf="salesProExpLength !=0"> 
+
+    <div class="heading-text m0">
+      <p>Sales Promotion Activity</p>
+    </div>
+
+    <div class="list-data flat-item" *ngFor="let promation of salesProExp" >
+      <div class="figure  padding0">
+        <ul>
+          <li>
+            <span>SALE ACTIVITY TYPE </span>
+            <p *ngIf="promation.salesActivityType==1">Mechanic get together</p>
+            <p *ngIf="promation.salesActivityType==2"> Retailer get together</p>
+            <p *ngIf="promation.salesActivityType==3">van Campaign</p>
+            <p *ngIf="promation.salesActivityType==4">Stall Campaign</p>
+            <p *ngIf="promation.salesActivityType==5">Exhibition Participation</p>
+            <p *ngIf="promation.salesActivityType==6">Signboard</p>
+            <p *ngIf="promation.salesActivityType==7">Wall/Shop Painting</p>
+            <p *ngIf="promation.salesActivityType==8">GiveAways</p>
+            <p *ngIf="promation.salesActivityType==9">Printing Of Lesafelts,banners, posters etc.</p>
+            <p class="w90">{{promation.placeOfActivity}}</p>
+            <p class="w100">{{promation.noOfAttendees}}</p>
+            <p></p>
+          </li>
+
+          <li>
+            <span>TAX</span>
+            <p>{{promation.tax}}</p>
+          </li>
+
+          <li>
+              <span>Rental Expenses</span>
+              <p>{{promation.rentalExpenses}}</p>
+            </li>
+
+            <li>
+                <span>Remarks</span>
+                <p>{{promation.remarks}}</p>
+              </li>
+
+              <li>
+                  <span>PlaceOfActivity</span>
+                  <p>{{promation.placeOfActivity}}</p>
+                </li>
+
+                <li>
+                    <span>No. Of Attendees</span>
+                    <p>{{promation.noOfAttendees}}</p>
+                  </li>
+
+                  <li>
+                      <span>Misc Expense</span>
+                      <p>{{promation.miscExpense}}</p>
+                    </li>
+
+                    <li>
+                        <span>Gifts Expense</span>
+                        <p>{{promation.giftsExpense}}</p>
+                      </li>
+                      <li>
+                          <span>foodExpense</span>
+                          <p>{{promation.foodExpense}}</p>
+                        </li>
+                         <!-- <li>
+                            <span>date</span>
+                            <p>{{promation.date |' dd MMM yyyy'}}</p>
+                          </li> -->
+
+                          <li>
+                              <span>Approved Amount</span>
+                              <p>{{promation.approvedAmount}}</p>
+                            </li>
+
+                            <li>
+                                <span>AvAidsExpense</span>
+                                <p>{{promation.avAidsExpense}}</p>
+                              </li>
+
+                              <li>
+                                  <span>city</span>
+                                  <p>{{promation.city}}</p>
+                                </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ========================= STARTING OF salesPromotionExps ========================-->
+  
+  
+
+  <div class="nothing-here" *ngIf="!isRequestInProcess && expenseList.length==0" style="height: 75%;">
+      <div class="outer">
+        <div class="innear">
+          <img src="assets/imgs/nothing.svg" alt="">
+          <p>Nothing is here</p>
+        </div>
+      </div>
+    </div>
+  <div class="h50"></div>
+</ion-content>

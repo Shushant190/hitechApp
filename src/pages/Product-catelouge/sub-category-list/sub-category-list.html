@@ -1,0 +1,35 @@
+<ion-header class="catalogue-header">
+	<ion-navbar>
+		<ion-title>SubSegment List</ion-title>
+		<!-- <ion-buttons end class="login-btn">
+			<button ion-button>
+				<img src="assets/icons/logout-ic.svg" alt="">
+			</button>
+		</ion-buttons> -->
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	
+	<div class="search-blog">
+	   	<ion-searchbar placeholder="Search SubSegment" #input [(ngModel)]="data.search" (input)="onSearchChangeHanlder()" (change)="onClearSearchHandler()"></ion-searchbar>
+	</div>
+	
+	<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+
+				<ion-refresher-content
+					pullingIcon="arrow-dropdown"
+					pullingText="Pull to refresh"
+					refreshingSpinner="circles"
+					refreshingText="Refreshing...">
+				</ion-refresher-content>
+				</ion-refresher>
+
+		<div class="listing">
+
+				<div class="fig" (click)="Seeproduct(val.value)" *ngFor="let val of subCatList">
+					<p>{{val.text}}</p>
+					<ion-icon name="ios-arrow-forward-outline"></ion-icon>
+				</div>
+		</div>
+</ion-content>

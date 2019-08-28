@@ -1,0 +1,65 @@
+<ion-header class="catalogue-header">
+	<ion-navbar>
+		<ion-title>New-Arrival List</ion-title>
+		<!-- <ion-buttons end class="login-btn">
+			<button ion-button>
+				<img src="assets/icons/logout-ic.svg" alt="">
+			</button>
+		</ion-buttons> -->
+	</ion-navbar>
+</ion-header>
+
+<ion-content class="gradient-bg">
+	
+	<div class="cs-header sticky-header">
+		<h2>{{totProd}} Products found</h2>
+		<ion-buttons end class="list-icon mr10" (click)="changeView()">
+			<button ion-button>
+				<img  [ngClass]="{'active':g_view}" src="assets/icons/icon-list.svg" alt="">
+			</button>
+		</ion-buttons>
+		
+	</div>
+	
+	<div class="main-container" [ngClass]="{'active':g_view}">
+		<div class="figure" (click)="SeeProductDetail(prod.productId)" *ngFor="let prod of productList">
+			<div class="pcl">
+				<div class="thumb">
+					<div class="outer">
+						
+						<div class="innear" *ngIf="!prod.documents || prod.documents?.length==0">
+							<img alt="" src="assets/imgs/dumy-product.svg">
+						</div>
+							
+						<div class="innear" *ngFor="let img of prod.documents;let i=index">
+							<img alt="" *ngIf="i==0"  src="{{api+img.documentId+'/'+'2'}}">
+						</div>
+					</div>
+				</div>
+				<div class="discriptions">
+					<h1>{{prod.productName}}</h1>
+					<h2>{{prod.partNumber}}</h2>
+					<h3>&#8377;<span> {{prod.mrp}}/-</span></h3>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="figure" (click)="SeeProductdetail()">
+			<div class="pcl">
+				<div class="thumb">
+					<div class="outer">
+						<div class="innear">
+							<img alt="" src="assets/imgs/dumy-product.svg">
+						</div>
+					</div>
+				</div>
+				<div class="discriptions">
+					<h1>Product ZYZ 2</h1>
+					<h2>HRG854721</h2>
+					<h3>MRP. &#8377;<span> 150 /-</span></h3>
+				</div>
+			</div>
+		</div> -->
+	</div>
+	
+</ion-content>
+

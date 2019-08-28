@@ -1,0 +1,115 @@
+<ion-header class="catalogue-header bg-af-none">
+	<ion-navbar>
+		<ion-title>
+			Followup List
+			<!-- 		
+				<ul>
+					<li>
+						<a class="pr40" [ngClass]= "{'tab-active' : filter.followUpBeforeDate == 1}" (click)="filter.followUpBeforeDate=1;filter.followUpAfterDate = 0;filter.date=0;todayFollowUpList(currentDate)">Today's Follow-Ups</a>
+					</li>
+					<li>
+						<a class="pr40" [ngClass]= "{'tab-active' : filter.followUpAfterDate == 1}" (click)="filter.followUpAfterDate = 1;filter.followUpBeforeDate = 0;filter.date=0;todayFollowUpList(currentDate)">Up Coming Follow-Ups</a>
+					</li>
+				</ul> -->
+				
+			</ion-title>
+			<!-- <ion-buttons end class="login-btn">
+				<button ion-button>
+				</button>
+			</ion-buttons> -->
+			<!-- <ion-buttons end class="login-btn" (click)="presentPopover($event)">
+				<button ion-button >
+					<img class="w4 h16" src="assets/icons/more-option-ic.svg" alt="">
+				</button>
+			</ion-buttons> -->
+		</ion-navbar>
+	</ion-header>
+	
+	
+	<ion-content>
+		<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+			<ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
+			</ion-refresher-content>
+		</ion-refresher>
+		
+		<div class="filter-search">
+			<ion-searchbar placeholder="Search" #input [(ngModel)]="data.search" (input)="onSearchChangeHanlder()" (ionChange)="onClearSearchHandler()"></ion-searchbar>
+		</div>
+		
+		
+		
+		<div class="action-btn-2">
+			<!-- <div class="head-count pb15">
+				Total 
+				<span class="top-counter">{{followupList.length}}</span>
+			</div> -->
+			<div class="top-tab">
+				
+				<div class="cs-button"   [ngClass]="selectedTab == 1 ? 'active' : ''"  (click)="todayFollowUpList(1);scrollToTop()" >
+					<p>Today's Followup <span class="counter">{{followupList.length}}</span></p>
+				</div>
+				<div class="cs-button" [ngClass]="selectedTab == 2 ? 'active' : ''" (click)="todayFollowUpList(2);scrollToTop()">
+					<p>Up Coming Followup <span class="counter">{{followupList.length}}</span></p>
+				</div>
+				<!-- {{followupList.length}} -->
+			</div>
+		</div>
+		
+		<div class="nothing-here" *ngIf="!isRequestInProcess && div==true">
+			<div class="outer">
+				<div class="innear">
+					<img src="assets/imgs/nothing.svg" alt="">
+					<p>Nothing is here</p>
+				</div>
+			</div>
+		</div>
+		
+		<!-- <div class="action-btn dflex">
+			<button class="left active" style=" margin-right: -45px; z-index: 2;" round ion-button>PENDING <h2 class="counter">5</h2></button>
+			<button class="right" round ion-button>DONE <h2 class="counter">3</h2></button>
+		</div> -->
+		<!-- <button (click)="todayFollowUp(1)">Today</button>
+			<button (click)="todayFollowUp(2)" >All</button> -->
+			
+			<div class="list pr16 pl16" *ngFor="let list of followupList"  (click)="goToDetail(list.followUpId)">
+				<div class="box {{list.nextFollowUpType}}" >
+					<div class="heading">
+						<p class="mobile">{{list.userName|titlecase}}</p>
+						<div class="call-d dflex" *ngIf="list.followUpType==1" ><i class="material-icons"    >phone</i> <p>Call</p></div>
+						<div class="mail-d dflex" *ngIf="list.followUpType==3" ><i class="material-icons"   >email</i> <p>Mail</p></div>
+						<div class="meeting-d dflex"   *ngIf="list.followUpType==2" ><i class="material-icons" >people</i> <p>Meeting</p></div>
+						<!-- ||{{list.nextFollowUpDate | date :'EEEE, MMMM d, y'}} -->
+						<!-- <h1 class="dark-clr line-height"><span>Last Follwoup</span> :  {{list.followUpDate |date:'dd MMM yyyy'}}</h1> -->
+					</div>
+					<div class="description">
+						<div class="content-flex">
+							<div class="dflex" style="flex-direction: column;">
+									<a class="cust-name" *ngIf="list.networkEstablishement!=''">{{list.networkEstablishement |titlecase}}</a>
+									<a class="cust-name" *ngIf="list.leadEstablishement!=''">{{list.leadEstablishement |titlecase}}</a>
+									<a class="cust-name" *ngIf="list.otherCustomer!=''">{{list.otherCustomer |titlecase}}</a>
+									<p class="f11 grey-clr fw700">{{list.activityModuleName |titlecase}}</p>
+							</div>
+							<p class="type approved-bg" *ngIf="list.isClosed==true">Closed</p>
+							<p class="type pending-bg" *ngIf="list.isClosed==false">Open</p>
+						</div>
+						<p class="dark-clr clamp-twoline" style="padding-top: 8px !important;"><strong>Remark</strong> : {{list.remarks |titlecase}}</p>
+					</div>
+					<!-- <div class="right-arrow"><ion-icon name="ios-arrow-forward-outline"></ion-icon></div> -->
+				</div>
+				
+			</div>
+			<div class="h50"></div>
+			
+  <ion-fab class="no-radius-btn" right bottom  (click)="scrollToTop()">
+    <button ion-fab color="vibrant" *ngIf="show"><i class="material-icons">expand_less</i></button>
+</ion-fab>
+<!--*ngIf="variableForScroll == false"   -->
+<ion-infinite-scroll (ionInfinite)="doInfiniteScroll($event)"  >
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+
+
+
+		</ion-content>
+		

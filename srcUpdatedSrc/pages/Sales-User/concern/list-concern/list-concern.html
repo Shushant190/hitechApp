@@ -1,0 +1,176 @@
+<!--
+  Generated template for the ListConcernPage page.
+  
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="catalogue-header bg-af-none">
+  
+  <ion-navbar>
+    <ion-title>List Concern  </ion-title>
+    <ion-buttons end class="login-btn" (click)="leadPopover($event)">
+			<button ion-button >
+				<img class="w4 h16" src="assets/icons/more-option-ic.svg" alt="">
+			</button>
+		</ion-buttons>
+  </ion-navbar>
+  
+</ion-header>
+
+<ion-content>
+
+  
+<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+
+
+    <div class="nothing-here" *ngIf="concernFinelList== null ">
+        <div class="outer">
+          <div class="innear">
+            <img src="assets/imgs/nothing.svg" alt="">
+            <p>Nothing is here</p>
+          </div>
+        </div>
+      </div> 
+  
+
+  <div class="filter-search">
+      <ion-searchbar  placeholder="Search" #input [(ngModel)]="data.search" (input)="onSearchChangeHanlder()" (ionChange)="onClearSearchHandler()" ></ion-searchbar>
+</div>
+
+
+
+  <!-- <div class="csm-tabs">
+    <button ion-item ><span>12</span><p>InProcess</p></button>
+    <button ion-item ><span>20</span><p>Completed</p></button>
+    <button ion-item ><span>5</span><p>Reopen</p></button>
+  </div> -->
+  <!-- 	
+    <div class="mt16">
+      <div class="list">
+        <div class="box pending" >
+          <div class="heading" >
+            <div class="call-d dflex">Abdul Khan</div>
+            <h1 class="dark-clr line-height">12 May 2019</h1>
+          </div>
+          <div class="description">
+            <a class="cust-name">Abacusdesk IT Solution PVT. LTD.</a>
+            <p class="type">InProcess</p>
+            <p class="dark-clr line-height-22 mt5"><strong>Concern Type :</strong> Product/Pre-Fitment</p>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    
+
+    <div class="action-btn-2">
+        <div class="head-count"> 
+            <span class="top-sticky-head mb0"  *ngIf="ListStatus == 1" > Draft</span>
+            <span class="top-sticky-head mb0"  *ngIf="ListStatus ==2" >  Pending Veridfication</span>
+            <span class="top-sticky-head mb0"   *ngIf="ListStatus ==3"   > Waiting For Approval</span>
+            <span class="top-sticky-head mb0"  *ngIf="ListStatus == 4">  Waiting For Concern No.</span>
+            <span class="top-sticky-head mb0"  *ngIf="ListStatus ==5" >  Approved</span>
+            <span class="top-sticky-head mb0"   *ngIf="ListStatus ==6" > Reject</span>
+            <span class="top-counter">  {{listLength}}</span>
+      </div>
+    </div>
+
+
+    
+    <div class="list">
+        <!-- (click)="goOnDetailPage(OrderDetailPage)" -->
+      <div class="box complete" *ngFor="let concerns of concernFinelList" (click)="gotodetail(concerns.concernId)" >
+        <div class="heading">
+          <div class="order-content">
+            <p class="font10 grey-clr">concern No.  {{concerns.claimNo}}</p>
+            <!-- <p class="color-font">{{concerns.createdByName}}</p> -->
+            
+            <!-- <p class="font10 grey-clr"><strong>Company Status :</strong>PENDING</p>
+              <p class="font10 grey-clr"><strong>Company Status :</strong>Completed</p>
+              <p class="font10 grey-clr"><strong>Company Status :</strong>Rejected</p>
+              
+              <p class="font10 grey-clr"><strong>Dealer Status :</strong>PENDING</p>
+              <p class="font10 grey-clr"><strong>Dealer Status :</strong>Completed</p>
+              <p class="font10 grey-clr"><strong>Dealer Status :</strong>Rejected</p> -->
+            </div>
+            
+            
+            <div class="wp100 dflex">
+              <h1 class="lineh38">{{concerns.createdOn|date:'d MMM y'}}</h1>
+              <!-- <button ion-button class="more-option-btn">
+                <img class="w9 h16" src="assets/icons/more-option-black-ic.svg" alt="">
+              </button> -->
+            </div>
+          </div>
+          
+          <div class="description pt6">
+            <a class="cust-name">{{concerns.networkEstablishment}}</a>
+            
+            <p class="type">{{concerns.concernStatusName}}</p>
+          </div>
+          
+          <div class="cs-list">
+            <div class="list-data flat-item">
+              <div class="figure pl-pr0">
+                <ul>
+                  <li>
+                    <span>Concern Type</span>
+                    
+                    <p>{{concerns.productConcernTypeName}}</p>
+                  </li>
+                  <li>
+                    <span>Concern Type.</span>
+                    <p>{{concerns.concernType}}</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div> 
+<!-- <div *ngFor="let a of concerns.productConcerns">
+
+    product info 
+
+    <p> Quantity</p>
+    <p>{{a.qunatity}}</p>
+    <p> Amount </p>
+    <p>{{a.netAmount}}</p>
+
+</div> -->
+        
+
+        </div>
+
+        
+      </div>
+    
+
+
+
+
+      
+  <div class="h50"></div>
+
+
+  <ion-fab class="no-radius-btn" right bottom  (click)="scrollToTop()">
+		<button ion-fab color="vibrant" *ngIf="show"><i class="material-icons">expand_less</i></button>
+	</ion-fab>
+
+
+<ion-infinite-scroll (ionInfinite)="doInfiniteScroll($event)"  *ngIf="variableForScroll == false"  >
+		<ion-infinite-scroll-content></ion-infinite-scroll-content>
+	  </ion-infinite-scroll>
+
+
+
+
+
+
+
+
+
+
+
+        </ion-content>
+        

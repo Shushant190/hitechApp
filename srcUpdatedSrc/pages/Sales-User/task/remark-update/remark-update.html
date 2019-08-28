@@ -1,0 +1,21 @@
+<ion-header class="catalogue-header">
+  <ion-navbar hideBackButton>
+    <ion-title>Remark Update</ion-title>
+    <ion-buttons end class="login-btn" (click)="Cancelupdate()">
+      <button ion-button>
+        <img class="w17" src="assets/icons/cross.svg">
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-item class="border-none mt0 pl0 " >
+        <ion-label class="remark black-clr" floating>Remark</ion-label>
+        <ion-textarea class="border-1px pl10" style="padding: 10px;" name="remarks" #remarks="ngModel" [(ngModel)]="task.remarks"></ion-textarea>
+      </ion-item>
+      <div class="full-width-btn cs-btn border-none pt16 right">
+          <div class="in-btn">
+          <button class="full-width-btn" ion-button color="secondary" round (click)="edit_remarks()" >Save</button>
+          </div>
+        </div>
+</ion-content>

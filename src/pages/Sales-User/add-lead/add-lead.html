@@ -1,0 +1,409 @@
+<ion-header class="catalogue-header">
+	<ion-navbar>
+		<ion-title>Create Lead</ion-title>
+		<ion-buttons end class="login-btn">
+			<button ion-button>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+<!-- <form> -->
+	
+	
+	<ion-content class="after-none">
+		
+		<div class="lead-steps">
+			<div class="step {{isNetworkType ? 'process' : ''}}"  >
+				<div class="outer">
+					<div class="innear">
+						<img class="default-img" src="assets/icons/step-1.svg" alt="">
+						<img class="active-img" src="assets/icons/step-1-active.svg" alt="">
+						<p>STEP 1</p>
+						<img class="process-img" src="assets/icons/process-ic.svg" alt="">
+						<img class="done-img" src="assets/icons/done-ic.svg" alt="">
+					</div>
+				</div>
+			</div>
+			
+			<div class="step {{isNetworkType && isBasicInfo ? 'process' : ''}}" >
+				<div class="outer">
+					<div class="innear">
+						<img class="default-img" src="assets/icons/step-2.svg" alt="">
+						<img class="active-img" src="assets/icons/step-2-active.svg" alt="">
+						<p>STEP 2</p>
+						<img class="process-img" src="assets/icons/process-ic.svg" alt="">
+						<img class="done-img" src="assets/icons/done-ic.svg" alt="">
+					</div>
+				</div>
+			</div>
+			
+			<div class="step {{isNetworkType && isBasicInfo && isAddressInfo ? 'process' : ''}}">
+				<div class="outer">
+					<div class="innear">
+						<img class="default-img" src="assets/icons/step-3.svg" alt="">
+						<img class="active-img" src="assets/icons/step-3-active.svg" alt="">
+						<p>STEP 3</p>
+						<img class="process-img" src="assets/icons/process-ic.svg" alt="">
+						<img class="done-img" src="assets/icons/done-ic.svg" alt="">
+					</div>
+				</div>
+			</div>
+			
+			<div class="step" >
+				<div class="outer">
+					<div class="innear">
+						<img class="default-img" src="assets/icons/step-4.svg" alt="">
+						<img class="active-img" src="assets/icons/step-4-active.svg" alt="">
+						<p>STEP 4</p>
+						<img class="process-img" src="assets/icons/process-ic.svg" alt="">
+						<img class="done-img" src="assets/icons/done-ic.svg" alt="">
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		<!-- Choose Type Start -->
+		<form *ngIf="!isNetworkType" [formGroup]="validateForm" (ngSubmit)="submitType()">
+			<div class="choose-type ul-clear m16">
+					<div class="main-heading"><h2>Choose Type *</h2></div>
+				<div class="cs-box-radio">
+					<ion-list radio-group name="userType" class="mb0" formControlName="userType" [(ngModel)]="data.userType" required>
+						<ion-item *ngFor="let userType of userTypelist">
+							<ion-label>{{userType.roleName}}</ion-label>
+							<ion-radio [value]="userType.roleId"></ion-radio>
+						</ion-item>
+					</ion-list>
+				</div>
+				
+				<p *ngIf="validateForm.get('userType').hasError('required') && validateForm.get('userType').touched" class="error-left relative">UserType  is required!</p>
+				
+				<div class="cs-btn border-none  mt16 right-btn">
+					<button ion-button waves-light color="secondary" round >NEXT <i class="material-icons pl30">trending_flat</i></button>
+				</div>
+			</div>
+		</form>
+		<!-- Choose Type End -->
+		
+		<!-- Basic Information Start -->
+		<form *ngIf="isNetworkType && !isBasicInfo" [formGroup]="basicForm" (ngSubmit)="submitBasic()">
+			<div class="step-2 ul-clear padding16">
+				<div class="main-heading mt16">
+					<h2>Basic Information</h2>
+				</div>
+				<div class="cs-form">
+					<div>
+						<label>Company Name <span>*</span></label>
+						<ion-item class="form-field">
+							<ion-input type="text" name="companyName" formControlName="companyName" [(ngModel)]="data.companyName" required></ion-input>
+						</ion-item>
+						<p *ngIf="basicForm.get('companyName').hasError('required') && basicForm.get('companyName').touched" class="error-left relative">Name  is required!</p>
+						<p *ngIf="basicForm.get('companyName').hasError('minlength') && basicForm.get('companyName').touched"  class="error-left relative">Name must be atleast 9 letter!</p>
+					</div>
+					
+					<div>
+						<label >Mobile Number *</label>
+						<ion-item class="form-field">
+							<ion-input type="tel" name="mobile" [attr.maxlength]="10" formControlName="mobile" [(ngModel)]="data.mobile" (keypress)="MobileNumber($event)" required></ion-input>
+						</ion-item>
+						<p *ngIf="(basicForm.get('mobile').hasError('minlength') || basicForm.get('mobile').hasError('maxlength')) && basicForm.get('mobile').touched"  class="error-left relative">Mobile must be 10 digit!</p>
+						<p *ngIf="basicForm.get('mobile').hasError('required') && basicForm.get('mobile').touched" class="error-left relative">Mobile  is required!</p>
+						
+					</div>
+					
+					
+					<div>
+						<label>Email ID *</label>
+						<ion-item class="form-field">
+							<ion-input type="text" name="email" formControlName="email" [(ngModel)]="data.email" required ></ion-input>
+						</ion-item>
+						<p *ngIf="data.email && basicForm.get('email').hasError('email') && basicForm.get('email').touched"  class="error-left relative">Email invalid!</p>
+						
+						<p *ngIf="basicForm.get('email').hasError('required') && basicForm.get('email').touched"  class="error-left relative">Email is required</p>
+					</div>
+					
+					
+					<div>
+						<label>Landline *</label>
+						<ion-item class="form-field">
+							<ion-input type="text" name="landline" formControlName="landline" [attr.maxlength]="12" (keypress)="MobileNumber($event)" [(ngModel)]="data.landline" required></ion-input>
+						</ion-item>
+						
+						<p *ngIf="basicForm.get('landline').hasError('required') && basicForm.get('landline').touched" class="error-left relative">Landline is required!</p>
+						
+						<p *ngIf="basicForm.get('landline').hasError('minlength') && basicForm.get('landline').touched"  class="error-left relative">landline must be Atleast 6 digit!</p>
+						
+						<p *ngIf="basicForm.get('landline').hasError('maxlength') && basicForm.get('landline').touched"  class="error-left relative">landline must be less or equal to 13 digit!</p>
+					</div>
+					
+					
+					<div>
+						<label>GST No.</label>
+						<ion-item class="form-field">
+							<ion-label floating class="grey-clr"></ion-label>
+							<ion-input type="tel" [attr.maxlength]="15" name="gst" formControlName="gst" [(ngModel)]="data.gst" ></ion-input>
+						</ion-item>
+						
+						<p *ngIf="(basicForm.get('gst').hasError('minlength') || basicForm.get('gst').hasError('maxlength')) && basicForm.get('gst').touched"  class="error-left relative">GST must be 15 digit!</p>
+					</div>
+					
+					
+					<div>
+						<label>Source *</label>
+						<ion-item class="form-field">
+							<ion-select  name="source" formControlName="source" [(ngModel)]="data.source">
+								<ion-option value="1">SOCIAL</ion-option>
+								<ion-option value="2">Direct</ion-option>
+								<ion-option value="3">WALK-IN</ion-option>
+								<ion-option value="4">REFERAL</ion-option>
+								<ion-option value="5">CALL</ion-option>
+							</ion-select>
+						</ion-item>
+						
+						<p *ngIf="basicForm.get('source').hasError('required') && basicForm.get('source').touched" class="error-left relative">source is required!</p>
+					</div>
+					
+				</div>
+				
+				<div class="cs-btn border-none  mt0 right-btn">
+					
+					<button ion-button color="dark" round style="left: 0px;	padding: 0 8px;"(click)="backButtonHandler('Basic')" ><i class="material-icons">keyboard_backspace</i></button>
+					
+					<button ion-button color="secondary" round>NEXT <i class="material-icons pl30">trending_flat</i></button>
+				</div>
+			</div>
+		</form>	
+		<!-- Basic Information End -->
+		<!-- Address Information Start -->
+		<form *ngIf="isBasicInfo && !isAddressInfo" [formGroup]="addressForm" (ngSubmit)="submitAddress()">
+			<div class="step-3 ul-clear padding16">
+				<div class="main-heading mt16">
+					<h2>Address Information</h2>
+				</div>
+				<div class="cs-form">
+					<div>
+						<label>Country *</label>
+						<ion-item class="form-field">
+							<ion-select name="country"  formControlName="country" [(ngModel)]="data.country" required>
+								<ion-option value="India">India</ion-option>
+							</ion-select>
+						</ion-item>
+						<p *ngIf="addressForm.get('country').hasError('required') && addressForm.get('country').touched" class="error-left relative">country is required!</p>
+					</div>
+					
+					<div>
+						<label>Street </label>
+						<ion-item class="form-field">
+							<ion-input type="text" name="street"  formControlName="street" [(ngModel)]="data.street"></ion-input>
+						</ion-item>
+						<p *ngIf="addressForm.get('street').hasError('required') && addressForm.get('street').touched" class="error-left relative">street is required!</p>
+						<p *ngIf="addressForm.get('street').hasError('minlength') && addressForm.get('street').touched"  class="error-left relative">Street must be Atleast 15 letters!</p>
+					</div>
+					
+					
+					
+					
+					<div>
+						<label>Select State</label>
+						<ion-item class="form-field">
+							<ionic-selectable
+							item-content
+							[(ngModel)]="data.state"
+							[items]="statelist"
+							itemValueField="name"
+							itemTextField="name"
+							[canSearch]="true"
+							formControlName="state"
+							(onChange)="get_district(data.state)">
+						</ionic-selectable>
+					</ion-item>
+					
+					<p *ngIf="addressForm.get('state').hasError('required') && addressForm.get('state').touched" class="error-left relative">State is required!</p>
+				</div>
+				
+				<div>
+					<label>Select District</label>
+					<ion-item class="form-field">
+						<ionic-selectable 
+						item-content
+						[(ngModel)]="data.districtName"
+						[items]="districtlist"
+						itemValueField="districtName"
+						itemTextField="districtName"
+						[canSearch]="true"
+						formControlName="districtName"
+						(onChange)="get_city(data.state,data.districtName)">
+					</ionic-selectable>
+				</ion-item>
+				
+				<p *ngIf="addressForm.get('districtName').hasError('required') && addressForm.get('districtName').touched" class="error-left relative">District is required!</p>
+			</div>
+			
+			
+			<div>
+				<label>Select City</label>
+				<ion-item class="form-field">
+					<ionic-selectable 
+					item-content
+					[(ngModel)]="data.cityName"
+					[items]="citylist"
+					itemValueField="cityName"
+					itemTextField="cityName"
+					[canSearch]="true"
+					formControlName="cityName"
+					(onChange)="get_pincode(data.cityName)">
+				</ionic-selectable>
+			</ion-item>
+			
+			
+			<p *ngIf="addressForm.get('cityName').hasError('required') && addressForm.get('cityName').touched" class="error-left relative">City is required!</p>
+		</div>
+		
+		<div>
+			<label>Select Pincode</label>
+			<ion-item class="form-field">
+				<ionic-selectable 
+				item-content
+				[(ngModel)]="data.pin"
+				[items]="areas"
+				itemValueField="pin"
+				itemTextField="pin"
+				[canSearch]="true"
+				formControlName="pin"
+				>
+			</ionic-selectable>
+		</ion-item>
+		
+		<p *ngIf="addressForm.get('pin').hasError('required') && addressForm.get('pin').touched" class="error-left relative">Pincode is required!</p>
+	</div>
+	
+</div>
+
+<div class="cs-btn border-none right-btn">
+	
+	<button ion-button color="dark" round style="left: 0px;	padding: 0 8px;" (click)="backButtonHandler('Address')"><i class="material-icons">keyboard_backspace</i></button>
+	
+	<button ion-button color="secondary" round>NEXT <i class="material-icons pl30">trending_flat</i></button>
+</div>
+</div>
+</form>
+<!-- Address Information End -->
+
+
+
+
+<!-- Contact Person & Segment Information Start -->
+
+<div *ngIf="isAddressInfo && !isContactSegment" class="step-4 ul-clear padding16">
+	
+	<div class="main-heading mt16">
+		<h2>Contact Person Information</h2>
+	</div>
+	<form [formGroup]="contactForm" (ngSubmit)="submitContact()">
+		
+		<div class="cs-form" style="overflow: inherit;">
+			<div>
+				<label>Name *</label>
+				<ion-item class="form-field">
+					<ion-input type="text" formControlName="contactName" [(ngModel)]="data.contactName" required></ion-input>				
+				</ion-item>
+				
+				<p *ngIf="contactForm.get('contactName').hasError('required') && contactForm.get('contactName').touched" class="error-left relative">Contact Name is required!</p>
+				
+				<p *ngIf="contactForm.get('contactName').hasError('minlength') && contactForm.get('contactName').touched"  class="error-left relative">Contact Name must be atleast 4 letter!</p>
+			</div>
+			
+			<div>
+				<label >Mobile 1 *</label>
+				<ion-item class="form-field">
+					<ion-input type="tel" [attr.maxlength]="10" (keypress)="MobileNumber($event)" formControlName="mobile1" [(ngModel)]="data.mobile1" required></ion-input>
+				</ion-item>
+				
+				<p *ngIf="(contactForm.get('mobile1').hasError('minlength') || contactForm.get('mobile1').hasError('maxlength')) && contactForm.get('mobile1').touched"  class="error-left relative">Mobile must be 10 digit!</p>
+				
+				<p *ngIf="contactForm.get('mobile1').hasError('required') && contactForm.get('mobile1').touched" class="error-left relative">Mobile  is required!</p>
+			</div>
+			
+			<div>
+					<label>Mobile 2</label>
+				<ion-item class="form-field">
+					<ion-input type="tel" [attr.maxlength]="10" (keypress)="MobileNumber($event)" formControlName="mobile2" [(ngModel)]="data.mobile2"></ion-input>
+				</ion-item>
+				
+				<p *ngIf="(contactForm.get('mobile2').hasError('minlength') || contactForm.get('mobile2').hasError('maxlength')) && contactForm.get('mobile2').touched"  class="error-left relative">Mobile must be 10 digit!</p>
+				
+				<p *ngIf="contactForm.get('mobile2').hasError('required') && contactForm.get('mobile2').touched" class="error-left relative">Mobile  is required!</p>
+			</div>
+			
+			<div class="cs-btn border-none right-btn mb16">
+					<button ion-button color="secondary" round >Add To List</button>
+				</div>
+<!-- 
+			<button class="add-btn">
+				<i class="material-icons">add</i>
+			</button> -->
+			<!-- <button ion-button color="secondary">add</button> -->
+		</div>
+		
+	</form>
+	
+	<div class="table-list" style="margin: 0px -16px;">
+		
+		<div class="table-head">
+			<table>
+				<tr>
+					<th>Name</th>
+					<th class="w95">Mobile 1</th>
+					<th class="w95">Mobile 2</th>
+					<th class="w35"></th>
+				</tr>
+			</table>
+		</div>
+		
+		<div class="table-body">
+			<table>
+				<tr *ngFor="let list of contactData;let contactIndex= index"> 
+					<td>{{list.name}}</td>
+					<td class="w95">{{list.mobile1}}</td>
+					<td class="w95">{{list.mobile2}}</td>
+					<td class="w35 dlicon">
+						<button (click)="deleteContact(contactIndex)"><i class="material-icons">delete</i></button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+	</div>
+	
+	<div class="main-heading"><h2>Segment Information</h2></div>
+	<div class="check-bx">
+		
+		<div class="csinfg">
+			
+			<ion-item *ngFor="let list of segmentList">
+				<ion-label>{{list.name}}</ion-label>
+				<ion-checkbox color="light" [(ngModel)]="list.checked" name="{{list.name}}" (change)="onSegmentChangeHandler()"></ion-checkbox>
+			</ion-item>
+			
+		</div>
+		
+		<p *ngIf="!isSegmentSelected" class="error-left relative">Select Atleast One Segment</p>
+		
+	</div>
+	
+	<div class="cs-btn border-none right-btn">
+		
+		<button ion-button color="dark" round style="left: 0px;	padding: 0 8px;" (click)="backButtonHandler('ContactSegment')"><i class="material-icons">keyboard_backspace</i></button>
+		
+		<button ion-button color="secondary" round style="padding-right: 30px !important;" (click)="saveLeadData()">SAVE</button>
+		
+	</div>
+	
+	
+</div>
+
+<!-- Contact Person & Segment Information End -->
+
+</ion-content>
+<!-- </form> -->

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 91 91">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: #cd234b;
+      }
+
+      .cls-3 {
+        filter: url(#Ellipse_1);
+      }
+    </style>
+    <filter id="Ellipse_1" x="0" y="0" width="91" height="91" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_11" data-name="Group 11" transform="translate(-8850 -2223)">
+    <g class="cls-3" transform="matrix(1, 0, 0, 1, 8850, 2223)">
+      <circle id="Ellipse_1-2" data-name="Ellipse 1" class="cls-1" cx="36.5" cy="36.5" r="36.5" transform="translate(9 6)"/>
+    </g>
+    <g id="Group_1251" data-name="Group 1251" transform="translate(23363.5 -4982)">
+      <g id="Group_1250" data-name="Group 1250" transform="translate(-14477.5 7235)">
+        <g id="Group_1249" data-name="Group 1249">
+          <path id="Path_380" data-name="Path 380" class="cls-2" d="M3.5,25.016H23.031V3.922L19.516.016H3.5ZM5.063,1.578H18.814v3.1h2.655V23.453H5.063Z" transform="translate(-3.5 -0.016)"/>
+          <rect id="Rectangle_792" data-name="Rectangle 792" class="cls-2" width="1.563" height="4.912" transform="translate(5.232 13.044)"/>
+          <rect id="Rectangle_793" data-name="Rectangle 793" class="cls-2" width="1.563" height="10.938" transform="translate(7.948 7.019)"/>
+          <rect id="Rectangle_794" data-name="Rectangle 794" class="cls-2" width="1.563" height="8.038" transform="translate(10.663 9.919)"/>
+          <rect id="Rectangle_795" data-name="Rectangle 795" class="cls-2" width="1.563" height="3.495" transform="translate(13.38 14.461)"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

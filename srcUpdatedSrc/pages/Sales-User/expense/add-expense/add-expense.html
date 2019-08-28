@@ -1,0 +1,84 @@
+<ion-header class="catalogue-header">
+	<ion-navbar>
+		<ion-title>Add Expense</ion-title>
+	</ion-navbar>
+</ion-header>
+<!-- <form> -->
+	<ion-content class="after-none">
+		<!-- Choose Type Start -->
+		<form *ngIf="currentStage==1" [formGroup]="validateForm">
+			<div class="choose-type ul-clear">
+				<div class="main-heading mt16 pr16 pl16"><h2>User Expense Type</h2></div>
+				<div class="cs-box-radio m16 mt0">
+					<ion-list radio-group name="expenseType" formControlName="expenseType" [(ngModel)]="data.expenseType" required class="mb0">
+						<ion-item>
+							<ion-label>Outstation Travel</ion-label>
+							<ion-radio [value]="2"></ion-radio>
+						</ion-item>
+						<ion-item>
+							<ion-label>Sales Promotion Activity</ion-label>
+							<ion-radio [value]="3"></ion-radio>
+						</ion-item>
+						<ion-item>
+							<ion-label>Misc Exp</ion-label>
+							<ion-radio [value]="4"></ion-radio>
+						</ion-item>
+						<ion-item>
+							<ion-label>Local Conveyance</ion-label>
+							<ion-radio [value]="1"></ion-radio>
+						</ion-item>
+					</ion-list>
+				</div>
+				
+				<div class="cs-btn border-none m16 mt0 right-btn">
+					
+					<button (click)="goToExpenseTypeHandler()" ion-button waves-light color="secondary" round >NEXT <i class="material-icons pl30">trending_flat</i></button>
+					
+				</div>
+				
+			</div>
+		</form>
+		<!-- Choose Type End -->
+		
+		<!-- Basic Information Start -->
+		<form *ngIf="currentStage==2" [formGroup]="basicForm" (ngSubmit)="goToExpenseTypeHandler()">
+			
+			<div class="cs-form m16">
+				<div class="main-heading mt16"><h2>Basic Information</h2></div>
+				<div class="div">
+					<div *ngIf="data.expenseType==2 || data.expenseType==4" >
+						<label>Purpose Of Visit<span>*</span></label>
+						<ion-item class="form-field">
+							<ion-input type="text" name="purposeOfVisit" formControlName="purposeOfVisit"  [(ngModel)]="data.purposeOfVisit" ></ion-input>
+						</ion-item>
+						
+						<p *ngIf="basicForm.get('purposeOfVisit').hasError('required') && basicForm.get('purposeOfVisit').touched" class="error-left relative">Purpose  is required!</p>
+						
+						<p *ngIf="basicForm.get('purposeOfVisit').hasError('minlength') && basicForm.get('purposeOfVisit').touched"  class="error-left relative">Purpose must be atleast 3 letter!</p>
+					</div>
+					
+					<div>
+						<label>Advance Amount <span>*</span></label>
+						<ion-item class="form-field">
+							<ion-input type="number" name="advanceAmount" formControlName="advanceAmount" [(ngModel)]="data.advanceAmount" ></ion-input>
+						</ion-item>
+						<p *ngIf="basicForm.get('advanceAmount').hasError('required') && basicForm.get('advanceAmount').touched" class="error-left relative">Advance Amount required!</p>
+					</div>
+					
+				</div>
+				
+				<div class="cs-btn border-none mt0 right-btn">
+					
+					<button ion-button color="dark" round style="left: 0px;	padding: 0 8px;"(click)="onGoBackHandler()" ><i class="material-icons">keyboard_backspace</i></button>
+					
+					<button ion-button color="secondary" round>NEXT <i class="material-icons pl30">trending_flat</i></button>
+					
+				</div>
+				
+			</div>
+		</form>	
+		<!-- Basic Information End -->
+		
+	</ion-content>
+	<!-- </form> -->
+	

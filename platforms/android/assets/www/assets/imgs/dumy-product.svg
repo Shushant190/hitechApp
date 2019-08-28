@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162 110">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f8f8f8;
+      }
+
+      .cls-2 {
+        fill: #bbb;
+      }
+    </style>
+  </defs>
+  <g id="Group_1791" data-name="Group 1791" transform="translate(-21 -138)">
+    <rect id="Rectangle_844" data-name="Rectangle 844" class="cls-1" width="162" height="110" transform="translate(21 138)"/>
+    <path id="ic_photo_library_24px" class="cls-2" d="M37.75,25.8V5.4A3.5,3.5,0,0,0,34.175,2H12.725A3.5,3.5,0,0,0,9.15,5.4V25.8a3.5,3.5,0,0,0,3.575,3.4h21.45a3.5,3.5,0,0,0,3.575-3.4ZM18.087,19l3.629,4.607L27.025,17.3l7.15,8.5H12.725ZM2,8.8V32.6A3.5,3.5,0,0,0,5.575,36H30.6V32.6H5.575V8.8Z" transform="translate(82 174)"/>
+  </g>
+</svg>

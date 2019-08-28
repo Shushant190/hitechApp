@@ -1,0 +1,209 @@
+<!--
+  Generated template for the PromotionAddExpPage page.
+  
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="catalogue-header">
+  
+  <ion-navbar>
+    <ion-title>Sales Promotion</ion-title>
+    <ion-buttons end class="login-btn" (click)="goToExpenseListPage()">
+      <button ion-button class="notifications">
+        <img class="w35" src="assets/icons/list.svg">
+        <span class="counter">{{expenseCartArr['Sales Promotion'] && expenseCartArr['Sales Promotion'].length ? expenseCartArr['Sales Promotion'].length : 0}}</span>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  
+</ion-header>
+
+<ion-content>
+  
+  <form id="promotionForm" [formGroup]="promotionForm">
+    
+    <div class="first step-2 ul-clear">
+      <div class="cs-form m16">
+        
+        <div>
+          <label>Date</label>
+          <ion-item class="form-field">
+            <ion-datetime formControlName="date" [(ngModel)]="promotionData.date" displayFormat="MMM DD, YYYY" [max]="todayDate"></ion-datetime>
+          </ion-item>
+          
+          <p *ngIf="promotionForm.get('date').hasError('required') && promotionForm.get('date').touched" class="error-left relative">Date required!</p>
+        </div>
+        
+        <div>
+          <label>Sales Promotion</label>
+          <ion-item class="form-field">
+            <ion-select formControlName="salesActivityType" [(ngModel)]="promotionData.salesActivityType"   >
+              <ion-option *ngFor="let row of salesActivityArr" [value]="row.typeId">{{row.name}}</ion-option>
+            </ion-select>
+          </ion-item>
+          
+          <p *ngIf="promotionForm.get('salesActivityType').hasError('required') && promotionForm.get('salesActivityType').touched" class="error-left relative">Type required!</p>
+        </div>
+        
+        <div>
+          <label>Select State</label>
+          <ion-item class="form-field">
+            <ionic-selectable
+            item-content
+            [(ngModel)]="promotionData.state"
+            [items]="stateList"
+            itemValueField="name"
+            itemTextField="name"
+            [canSearch]="true"
+            formControlName="state"
+            (onChange)="getDistrictList(promotionData.state)">
+          </ionic-selectable>
+        </ion-item>
+        
+        <p *ngIf="promotionForm.get('state').hasError('required') && promotionForm.get('state').touched" class="error-left relative">State is required!</p>
+      </div>
+      
+      <div>
+        <label>Select District</label>
+        <ion-item class="form-field">
+          <ionic-selectable 
+          item-content
+          [(ngModel)]="promotionData.district"
+          [items]="districtList"
+          itemValueField="districtName"
+          itemTextField="districtName"
+          [canSearch]="true"
+          formControlName="district"
+          (onChange)="getCityList(promotionData.state,promotionData.district)">
+        </ionic-selectable>
+      </ion-item>
+      
+      <p *ngIf="promotionForm.get('district').hasError('required') && promotionForm.get('district').touched" class="error-left relative">District is required!</p>
+    </div>
+    
+    <div>
+      <label>Select City</label>
+      <ion-item class="form-field">
+        <ionic-selectable 
+        item-content
+        [(ngModel)]="promotionData.city"
+        [items]="cityList"
+        itemValueField="cityName"
+        itemTextField="cityName"
+        [canSearch]="true"
+        formControlName="city">
+      </ionic-selectable>
+    </ion-item>
+    
+    <p *ngIf="promotionForm.get('city').hasError('required') && promotionForm.get('city').touched" class="error-left relative">City is required!</p>
+  </div>
+  
+  <div>
+    <label>Place Of Activity</label>
+    <ion-item class="form-field">
+      <ion-input type="text" formControlName="placeOfActivity" [(ngModel)]="promotionData.placeOfActivity" ></ion-input>
+    </ion-item>
+    
+    <p *ngIf="promotionForm.get('placeOfActivity').hasError('required') && promotionForm.get('placeOfActivity').touched" class="error-left relative">Place Activity required!</p>
+    
+    <p *ngIf="promotionForm.get('placeOfActivity').hasError('minlength') && promotionForm.get('placeOfActivity').touched"  class="error-left relative">Place Activity must be atleast 3 Letters!</p>
+  </div>
+  
+  <div>
+    <label>No Of Attendees</label>
+    <ion-item class="form-field">
+      <ion-input type="number" formControlName="noOfAttendees" [(ngModel)]="promotionData.noOfAttendees" ></ion-input>
+    </ion-item>
+    
+    <p *ngIf="promotionForm.get('noOfAttendees').hasError('required') && promotionForm.get('noOfAttendees').touched" class="error-left relative">Attendees required!</p>
+    
+    <p *ngIf="promotionForm.get('noOfAttendees').hasError('minlength') && promotionForm.get('noOfAttendees').touched"  class="error-left relative">Attendees must be atleast 1 digit!</p>
+  </div>
+  
+  <div>
+    <label>Rental Expense</label>
+    <ion-item class="form-field">
+      <ion-input type="number" formControlName="rentalExpenses" [(ngModel)]="promotionData.rentalExpenses" ></ion-input>
+    </ion-item>
+    
+    <p *ngIf="promotionForm.get('rentalExpenses').hasError('required') && promotionForm.get('rentalExpenses').touched" class="error-left relative">Rental Expense required!</p>
+  </div>
+  
+  <div>
+    <label>Food Expense</label>
+    <ion-item class="form-field">
+      <ion-input type="number" formControlName="foodExpense" [(ngModel)]="promotionData.foodExpense" ></ion-input>
+    </ion-item>
+    <p *ngIf="promotionForm.get('foodExpense').hasError('required') && promotionForm.get('foodExpense').touched" class="error-left relative">Food Expense required!</p>
+  </div>
+  
+  <div>
+    <label>Av Aids Expense</label>
+    <ion-item class="form-field">
+      <ion-input type="number" formControlName="avAidsExpense" [(ngModel)]="promotionData.avAidsExpense" ></ion-input>
+    </ion-item>
+    
+    <p *ngIf="promotionForm.get('avAidsExpense').hasError('required') && promotionForm.get('avAidsExpense').touched" class="error-left relative">Av Aids Expense required!</p>
+    
+  </div>
+  
+  <div>
+    <label>Gift Expense</label>
+    <ion-item class="form-field">
+      <ion-input type="number" formControlName="giftsExpense" [(ngModel)]="promotionData.giftsExpense" ></ion-input>
+    </ion-item>
+    
+    <p *ngIf="promotionForm.get('giftsExpense').hasError('required') && promotionForm.get('giftsExpense').touched" class="error-left relative">Gift Expense required!</p>
+  </div>
+  
+  <div>
+    <label>Misc Expense</label>
+    <ion-item class="form-field">
+      <ion-input type="number" formControlName="miscExpense" [(ngModel)]="promotionData.miscExpense"></ion-input>
+    </ion-item>
+    
+    <p *ngIf="promotionForm.get('miscExpense').hasError('required') && promotionForm.get('miscExpense').touched" class="error-left relative">MISC Expense required!</p>
+    
+  </div>
+  
+  
+  <div>
+    <label>Approved Expense</label>
+    <ion-item class="form-field">
+      <ion-input type="number" formControlName="approvedAmount" [(ngModel)]="promotionData.approvedAmount"></ion-input>
+    </ion-item>
+    
+    <p *ngIf="promotionForm.get('approvedAmount').hasError('required') && promotionForm.get('approvedAmount').touched" class="error-left relative">Approved Amount required!</p>
+  </div>
+  
+  <div>
+    <label>Tax Expense</label>
+    <ion-item class="form-field">
+      <ion-input type="number" formControlName="tax" [(ngModel)]="promotionData.tax"></ion-input>
+    </ion-item>
+    
+    <p *ngIf="promotionForm.get('tax').hasError('required') && promotionForm.get('tax').touched" class="error-left relative">Tax required!</p>
+  </div>
+  
+  
+  <div>
+    <label>Remark</label>
+    <ion-item class="form-field">
+      <ion-textarea formControlName="remarks" [(ngModel)]="promotionData.remarks"></ion-textarea>
+    </ion-item>
+    <p *ngIf="promotionForm.get('remarks').hasError('required') && promotionForm.get('remarks').touched" class="error-left relative">Remarks required!</p>
+  </div>
+  
+</div>
+</div>
+
+</form>
+
+</ion-content>
+
+
+<ion-footer padding>
+  <div class="cs-btn border-none  right-btn">
+    <button class="wp100" (click)="onSaveHandler()" ion-button color="secondary" round>Add To List</button>
+  </div>
+</ion-footer>

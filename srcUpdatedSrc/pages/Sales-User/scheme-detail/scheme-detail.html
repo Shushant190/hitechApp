@@ -1,0 +1,52 @@
+<!--
+  Generated template for the SchemeDetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="catalogue-header">
+
+  <ion-navbar>
+    <ion-title>Scheme Detail</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <p>SCHEME TITLE  =>  {{schemeDetail.title |titlecase}}</p>
+  <p>    {{length}} </p>
+
+  <p>SCHEME TYPE</p>
+  <p *ngIf="schemeDetail.schemeType==0">SELECTED</p>
+  <p *ngIf="schemeDetail.schemeType==1">GENRIC</p>
+
+
+
+  <span>CREATED DATE</span>
+  <p class="link-clr">{{schemeDetail.createdOn| date:'EEEE, MMMM d, y'}}</p>
+
+
+
+
+  <span>VALID FROM</span>
+  <p>{{schemeDetail.validFrom| date:'EEEE, MMMM d, y'}}</p>
+
+  <span>VALID TILL</span>
+  <p>{{schemeDetail.validTill| date:'EEEE, MMMM d, y'}}</p>
+
+<h4>DISTRIBUTER INFORMATION</h4>
+
+
+  <div *ngFor="let scheme of schemeDetail.schemeProductDetails"  >
+
+<p> PART NUMBER     {{scheme.partNumberCode |titlecase}}  </p>
+<p [innerHTML]="scheme.offerDescription">  DESCRIPTIOn   {{scheme.offerDescription  |titlecase }}</p>
+<p [innerHTML]="schemeDetail.tc">TERMS CONDITION =>>>   {{schemeDetail.tc |titlecase}}</p>
+<p  [innerHTML]="schemeDetail.schemeDescription">DES==>>{{schemeDetail.schemeDescription |titlecase}}</p>
+<p></p>
+
+  </div>
+
+</ion-content>

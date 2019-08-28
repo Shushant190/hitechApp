@@ -1,0 +1,25 @@
+page-adddistributor {
+    .shp-box
+    {
+        padding:16px 32px;
+
+        ion-item
+        {
+            background: #f8f8f8;
+
+            .item-inner
+            {
+                border: 0px !important;
+
+                .input-wrapper
+                {
+                    ion-label
+                    {
+                        white-space: pre-line;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+}

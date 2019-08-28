@@ -1,0 +1,402 @@
+<ion-header class="catalogue-header">
+    <ion-navbar>
+        <ion-title>Add Distributor</ion-title>
+        <!-- <ion-buttons end class="login-btn">
+            <button ion-button>
+           </button>
+        </ion-buttons> -->
+    </ion-navbar>
+</ion-header>
+<!-- <form> -->
+    <ion-content class="after-none">
+        
+        <div class="lead-steps">
+            <div class="step process"  >
+                <div class="outer">
+                    <div class="innear">
+                        <img class="default-img" src="assets/icons/step-1.svg" alt="">
+                        <img class="active-img" src="assets/icons/step-1-active.svg" alt="">
+                        <p>STEP 1</p>
+                        <img class="process-img" src="assets/icons/process-ic.svg" alt="">
+                        <img class="done-img" src="assets/icons/done-ic.svg" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="step"  >
+                <div class="outer">
+                    <div class="innear">
+                        <img class="default-img" src="assets/icons/step-2.svg" alt="">
+                        <img class="active-img" src="assets/icons/step-2-active.svg" alt="">
+                        <p>STEP 2</p>
+                        <img class="process-img" src="assets/icons/process-ic.svg" alt="">
+                        <img class="done-img" src="assets/icons/done-ic.svg" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="step" >
+                <div class="outer">
+                    <div class="innear">
+                        <img class="default-img" src="assets/icons/step-3.svg" alt="">
+                        <img class="active-img" src="assets/icons/step-3-active.svg" alt="">
+                        <p>STEP 3</p>
+                        <img class="process-img" src="assets/icons/process-ic.svg" alt="">
+                        <img class="done-img" src="assets/icons/done-ic.svg" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="step" >
+                <div class="outer">
+                    <div class="innear">
+                        <img class="default-img" src="assets/icons/step-4.svg" alt="">
+                        <img class="active-img" src="assets/icons/step-4-active.svg" alt="">
+                        <p>STEP 4</p>
+                        <img class="process-img" src="assets/icons/process-ic.svg" alt="">
+                        <img class="done-img" src="assets/icons/done-ic.svg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Basic Information Start -->
+        <div class="step-1 ul-clear">
+            <p class="heading-text m32 mb0">Basic Information</p>
+            
+            <div class="sales-seltion-field m32 mt0">
+                <ion-item class="mt0 border-none">
+                    <ion-label floating class="grey-clr">Company Name <span>*</span></ion-label>
+                    <ion-input type="text" required ></ion-input>
+                </ion-item>
+                
+                <ion-item class="mt0 border-none">
+                    <ion-label floating class="grey-clr">Distributor Code *</ion-label>
+                    <ion-input type="text" required ></ion-input>
+                </ion-item>
+                
+                <ion-item class="mt0 border-none">
+                    <ion-label floating class="grey-clr">GST No. *</ion-label>
+                    <ion-input type="text" required></ion-input>
+                </ion-item>
+                
+                <ion-item class="mt0 border-none">
+                    <ion-label floating class="grey-clr">Pan No. *</ion-label>
+                    <ion-input type="tel" required></ion-input>
+                </ion-item>
+                
+                <ion-item class="mt0 border-none">
+                    <ion-label floating class="grey-clr">Date of Commencement</ion-label>
+                    <ion-input type="tel" required></ion-input>
+                </ion-item>
+            </div>
+            
+            
+            <p class="heading-text m32 mb0">Applicant Information</p>
+            
+            <div class="sales-seltion-field m32 mt0">
+                <ion-item class="mt0 border-none">
+                    <ion-label floating class="grey-clr">Name <span>*</span></ion-label>
+                    <ion-input type="text" required ></ion-input>
+                </ion-item>
+                
+                <ion-item class="mt0 border-none">
+                    <ion-label floating class="grey-clr">Mobile No. *</ion-label>
+                    <ion-input type="text" required ></ion-input>
+                </ion-item>
+                
+                <ion-item class="mt0 border-none">
+                    <ion-label floating class="grey-clr">Email *</ion-label>
+                    <ion-input type="text" required></ion-input>
+                </ion-item>
+                
+                <ion-item class="mt0 border-none">
+                    <ion-label floating class="grey-clr">Lnadline</ion-label>
+                    <ion-input type="tel" required></ion-input>
+                </ion-item>
+                
+                <ion-item class="mt0 border-none">
+                    <ion-label floating class="grey-clr">Date of Birth</ion-label>
+                    <ion-input type="tel" required></ion-input>
+                </ion-item>
+                
+                <ion-item class="mt0 border-none">
+                    <ion-label floating class="grey-clr">Date of Marriage</ion-label>
+                    <ion-input type="tel" required></ion-input>
+                </ion-item>
+            </div>
+            
+            
+            <div class="cs-btn border-none m32 mt0 right-btn">
+                <button ion-button color="dark" round style="left: 0px;	padding: 0 8px;"(click)="back1()" ><i class="material-icons">keyboard_backspace</i></button>
+                <button ion-button color="secondary" round>NEXT <i class="material-icons pl30">trending_flat</i></button>
+            </div>
+        </div>
+        <!-- Basic Information End -->
+        
+        <!-- Address Information Start -->
+        <div class="step-2 ul-clear">
+            <p class="heading-text m32 mb0">Target Information</p>
+            
+            <div class="sales-seltion-field m32">
+                <ion-item class="mt0">
+                    <ion-label class="grey-clr">Year *</ion-label>
+                    <ion-select name="country" required >
+                        <ion-option value="India">2019 - 20120</ion-option>
+                    </ion-select>
+                </ion-item>
+                
+                <ion-item class="mt0">
+                    <ion-label class="grey-clr">Yearly Target *</ion-label>
+                    <ion-select name="country" required >
+                        <ion-option value="India">2019 - 20120</ion-option>
+                    </ion-select>
+                </ion-item>
+                
+                <ion-item class="mt0">
+                    <ion-label class="grey-clr">Segement *</ion-label>
+                    <ion-select name="country" required >
+                        <ion-option value="India">2019 - 20120</ion-option>
+                    </ion-select>
+                </ion-item>
+            </div>
+            
+            <p class="heading-text m32 mb0">Contact Person Information</p>
+            
+            <div class="sales-seltion-field cs-box-radio m32 mt16" style="overflow: inherit;">
+                <ion-item class="mt0 border-none adcnt">
+                    <ion-label floating class="grey-clr pl10">Name *</ion-label>
+                    <ion-input type="text" required></ion-input>				
+                </ion-item>
+                
+                <ion-item class="mt0 border-none adcnt">
+                    <ion-label floating class="grey-clr pl10">Mobile 1 *</ion-label>
+                    <ion-input type="tel" required></ion-input>
+                </ion-item>
+                
+                <ion-item class="mt0 border-none adcnt">
+                    <ion-label floating class="grey-clr pl10">Mobile 2</ion-label>
+                    <ion-input type="tel"></ion-input>
+                </ion-item>
+                
+                <button class="add-btn">
+                    <i class="material-icons">add</i>
+                </button>
+            </div>
+            
+            
+            <div class="table-list">
+                <div class="table-head">
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <th class="w95">Mobile 1</th>
+                            <th class="w95">Mobile 2</th>
+                            <th class="w35"></th>
+                        </tr>
+                    </table>
+                </div>
+                <div class="table-body">
+                    <table>
+                        <tr> 
+                            <td>Rahul Sharma</td>
+                            <td class="w95">985748562</td>
+                            <td class="w95">--</td>
+                            <td class="w35 dlicon"><button><i class="material-icons">delete</i></button></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            
+            <div class="cs-btn border-none m32 mt0 right-btn">
+                <button ion-button color="dark" round style="left: 0px;	padding: 0 8px;" (click)="back2()"><i class="material-icons">keyboard_backspace</i></button>
+                <button ion-button color="secondary" round>NEXT <i class="material-icons pl30">trending_flat</i></button>
+            </div>
+        </div>
+        <!-- Address Information End -->
+        
+        <!-- Contact Person Information Start -->
+        <div class="step-3 ul-clear">
+            <p class="heading-text m32 mb0">Address Information</p>
+            
+            <div class="sales-seltion-field m32">
+                <ion-item class="mt0 border-none">
+                    <ion-label floating class="grey-clr">Street </ion-label>
+                    <ion-input type="text"></ion-input>
+                </ion-item>
+                
+                <ion-item>
+                    <ion-label>State *</ion-label>
+                    <ion-select name="state" required>
+                        <ion-option disabled="">Select State</ion-option>
+                        <ion-option value="Haryana">Haryana</ion-option>
+                        <ion-option value="UP">Haryana</ion-option>
+                    </ion-select>
+                </ion-item>
+                
+                <ion-item>
+                    <ion-label class="pl0">District *</ion-label>
+                    <ion-select name="district" required>
+                        <ion-option disabled="">Select District</ion-option>
+                        <ion-option value="faridabad">Faridabad</ion-option>
+                    </ion-select>
+                </ion-item>
+                
+                <ion-item>
+                    <ion-label class="pl0">City *</ion-label>
+                    <ion-select name="city" required>
+                        <ion-option disabled="">Select City</ion-option>
+                        <ion-option value="faridabad">Faridabad</ion-option>
+                    </ion-select>
+                </ion-item>
+                
+                <ion-item>
+                    <ion-label class="pl0">Pin Code *</ion-label>
+                    <ion-select name="pin" required>
+                        <ion-option disabled="">Select PinCode</ion-option>
+                        <ion-option value="1">121001</ion-option>
+                    </ion-select>
+                </ion-item>
+                
+                <ion-item>
+                    <ion-label class="pl0">Territory</ion-label>
+                    <ion-select name="salesexecutive">
+                        <ion-option disabled="">Select Territory</ion-option>
+                        <ion-option value="1">Territory 1</ion-option>
+                        <ion-option value="1">Territory 2</ion-option>
+                    </ion-select>
+                </ion-item>
+                
+                <ion-item>
+                    <ion-label class="pl0">Sales User</ion-label>
+                    <ion-select name="segment" required>
+                        <ion-option disabled="">Select Executive</ion-option>
+                        <ion-option value="1">Rahul Bhutani</ion-option>
+                    </ion-select>
+                </ion-item>
+            </div>
+            
+            
+            <p class="heading-text m32 mb0">Shipping Address Information</p>
+
+            <div class="shp-box">
+                <ion-item>
+                    <ion-label>Shipping Address same as Address</ion-label>
+                    <ion-toggle color="secondary" checked="true"></ion-toggle>
+                </ion-item>
+            </div>
+
+            
+            <div class="sales-seltion-field m32 mt0">
+                <ion-item class="mt0 border-none">
+                    <ion-label floating class="grey-clr">Email *</ion-label>
+                    <ion-input type="text" required></ion-input>				
+                </ion-item>
+                
+                <ion-item class="mt0 border-none">
+                    <ion-label floating class="grey-clr">Landline *</ion-label>
+                    <ion-input type="tel" required></ion-input>
+                </ion-item>
+                
+                <ion-item class="mt0 border-none">
+                    <ion-label floating class="grey-clr">Fax</ion-label>
+                    <ion-input type="tel"></ion-input>
+                </ion-item>
+                
+                <ion-item class="mt0 border-none">
+                    <ion-label floating class="grey-clr">Mobile No.</ion-label>
+                    <ion-input type="tel"></ion-input>
+                </ion-item>
+                
+                
+                <ion-item class="mt0 border-none">
+                    <ion-label floating class="grey-clr">Street </ion-label>
+                    <ion-input type="text"></ion-input>
+                </ion-item>
+                
+                <ion-item>
+                    <ion-label>State *</ion-label>
+                    <ion-select name="state" required>
+                        <ion-option disabled="">Select State</ion-option>
+                        <ion-option value="Haryana">Haryana</ion-option>
+                        <ion-option value="UP">Haryana</ion-option>
+                    </ion-select>
+                </ion-item>
+                
+                <ion-item>
+                    <ion-label class="pl0">District *</ion-label>
+                    <ion-select name="district" required>
+                        <ion-option disabled="">Select District</ion-option>
+                        <ion-option value="faridabad">Faridabad</ion-option>
+                    </ion-select>
+                </ion-item>
+                
+                <ion-item>
+                    <ion-label class="pl0">City *</ion-label>
+                    <ion-select name="city" required>
+                        <ion-option disabled="">Select City</ion-option>
+                        <ion-option value="faridabad">Faridabad</ion-option>
+                    </ion-select>
+                </ion-item>
+                
+                <ion-item>
+                    <ion-label class="pl0">Pin Code *</ion-label>
+                    <ion-select name="pin" required>
+                        <ion-option disabled="">Select PinCode</ion-option>
+                        <ion-option value="1">121001</ion-option>
+                    </ion-select>
+                </ion-item>
+                
+                <ion-item>
+                    <ion-label class="pl0">Territory</ion-label>
+                    <ion-select name="salesexecutive">
+                        <ion-option disabled="">Select Territory</ion-option>
+                        <ion-option value="1">Territory 1</ion-option>
+                        <ion-option value="1">Territory 2</ion-option>
+                    </ion-select>
+                </ion-item>
+                
+                <ion-item>
+                    <ion-label class="pl0">Sales User</ion-label>
+                    <ion-select name="segment" required>
+                        <ion-option disabled="">Select Executive</ion-option>
+                        <ion-option value="1">Rahul Bhutani</ion-option>
+                    </ion-select>
+                </ion-item>
+            </div>
+            
+            <div class="cs-btn border-none m32 mt0 right-btn">
+                <button ion-button color="dark" round style="left: 0px;	padding: 0 8px;" (click)="back2()"><i class="material-icons">keyboard_backspace</i></button>
+                <button ion-button color="secondary" round>NEXT <i class="material-icons pl30">trending_flat</i></button>
+            </div>
+        </div>
+        <!-- Contact Person Information End -->
+        
+        <!-- Address Information Start -->
+        <div class="step-4 ul-clear">
+            <p class="heading-text m32 mb0">Bank Detail</p>
+            
+            <div class="sales-seltion-field m32">
+                
+                <ion-item class="mt0 border-none">
+                    <ion-label floating class="grey-clr">Bank Name *</ion-label>
+                    <ion-input type="text" required></ion-input>				
+                </ion-item>
+                
+                <ion-item class="mt0 border-none">
+                    <ion-label floating class="grey-clr">Account No.</ion-label>
+                    <ion-input type="text" required></ion-input>
+                </ion-item>
+                
+                <ion-item class="mt0 border-none">
+                    <ion-label floating class="grey-clr">IFSC Code</ion-label>
+                    <ion-input type="text"></ion-input>
+                </ion-item>
+            </div>            
+            <div class="cs-btn border-none m32 mt0 right-btn">
+                <button ion-button color="secondary" round style="padding-right: 30px !important;" (click)="save()">SAVE</button>
+            </div>
+        </div>
+        <!-- Address Information End -->
+        
+    </ion-content>
+    <!-- </form> -->
+    

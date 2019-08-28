@@ -1,0 +1,144 @@
+<!--
+  Generated template for the AddLeavePage page.
+  
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="catalogue-header">
+  
+  <ion-navbar>
+    <ion-title>Leave</ion-title>
+  </ion-navbar>
+  
+</ion-header>
+
+
+<ion-content>
+  <div class="action-btn-2" style="top: 0px">
+    <div class="top-tab">
+      <div class="cs-button active"><p>New Leave</p></div>
+      <div class="cs-button"><p>Remaining Leave</p></div>
+    </div>
+  </div>
+  <form action="" name="form"  (ngSubmit)=" (d.form.valid) && ApplyLeave()"  #d="ngForm" novalidate>
+    
+    
+    
+    <div class="padding16 pt0">
+    <div class="leave-info">
+      <div class="head">
+        <button class="arrow-button">
+          <i class="material-icons ng-star-inserted">chevron_left</i>
+        </button>
+        <h2>Leave Info 2018-2019</h2>
+        <button class="arrow-button">
+          <i class="material-icons ng-star-inserted">chevron_right</i>
+        </button>
+      </div>
+      <ul>
+        <li>
+          <div class="left-column">Leave Type</div>
+          <div class="right-column">
+            <div class="leave-count">Total</div>
+            <div class="leave-count">Used</div>
+            <div class="leave-count">Pending</div>
+          </div>
+        </li>
+        <li *ngFor="let a of myLeavLeft">
+          <div class="left-column">Sick Leave</div>
+          <div class="right-column">
+            <div class="leave-count"><span class="total">{{a.totalLeaves}}</span></div>
+            <div class="leave-count"><span class="used">{{ a.totalLeaves - a.remainingLeaves}}</span></div>
+            <div class="leave-count"><span class="pending">{{a.remainingLeaves}}</span></div>
+          </div>
+        </li>
+        
+        
+        
+      </ul>
+    </div>
+    
+    
+    
+    
+    <div class="cs-form">
+      <div>
+        <label>Select Leave Type</label>
+        <ion-item class="form-field">
+          <ion-select   name="leave_type" [(ngModel)]="form.leave_type" 
+          [ngClass]="{'is-invalid' : d.submitted && leave_type.invalid}"
+          #leave_type="ngModel"  required (ngModelChange)="test(form.leave_type)">
+          <ion-option   *ngFor="let a of newArrayList" value="{{a.ruleId}}">{{a.subject}}</ion-option>
+          <ion-option value="other">other</ion-option>
+        </ion-select>
+        
+        <div *ngIf="d.submitted && leave_type.invalid && leave_type.touched" >
+          <div  class=" error-left">LeaveType is required</div>
+        </div> 
+        <div *ngIf="apple" class="invalid-feedback">You don't have any pending {{leaveName}}</div>
+      </ion-item>
+    </div>
+    
+    <div>
+      <label> Start Date </label>
+      <ion-item class="form-field">
+        <ion-datetime display-format="MMM DD, YYYY HH:mm"
+        [min]="TodayDate" 
+        name="startDate" [(ngModel)]="form.startDate"    #startDate="ngModel"
+        (ngModelChange)="onDateChangeHandler(form.startDate)"
+        required></ion-datetime>
+      </ion-item>
+    </div>
+    
+    <div>
+      <label>END Date</label>
+      <ion-item class="form-field">
+        <ion-datetime display-format="MMM DD, YYYY"  name="EndDate" [(ngModel)]="form.EndDate"
+        required 
+        [ngClass]="{'is-invalid' : d.submitted && EndDate.invalid}"
+        #EndDate="ngModel" 
+        [min]="form.startDate"
+        [max]="endDate"
+        ></ion-datetime>
+      </ion-item>
+    </div>
+    
+    <div>
+      <label>Remarks</label>
+      <ion-item class="form-field">
+        <ion-textarea placeholder="Enter a "
+        name= "remark" [(ngModel)]="form.remark"   #remark="ngModel"  [ngClass]="{'is-invalid' : d.submitted && remark.invalid}" required  ></ion-textarea>
+      </ion-item>
+      <div *ngIf="d.submitted && remark.invalid && remark.touched" >
+        <div  class=" error-left">Remark is required</div>
+      </div> 
+    </div>
+    
+  </div>
+  
+  
+  <div class="col s12 pl0" *ngIf="isDescription">
+    Description  
+    <span innerHTML="{{form.description}}"></span>
+    <div class="control-field">
+      
+      
+      <!-- <mat-form-field class="cs-input">
+        <textarea matInput   name="description" #description="ngModel"  [(ngModel)]="form.description" readonly class="h200"></textarea>
+      </mat-form-field> -->
+    </div>
+  </div>
+  
+  <div class="cs-btn border-none mt16 right-btn">
+    <button type="submit" name="submit" ion-button color="secondary" round >Save</button>
+  </div>
+</div>
+</form>
+
+</ion-content>
+
+<ion-footer padding>
+    <div class="cs-btn border-none mt16 right-btn">
+        <button class="wp100" type="submit" name="submit" ion-button color="secondary" round >Save</button>
+      </div>
+</ion-footer>

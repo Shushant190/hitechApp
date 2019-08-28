@@ -1,0 +1,160 @@
+<!--
+  Generated template for the LeaveDetailPage page.
+  
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!-- <ion-header>
+  
+  <ion-navbar>
+    <ion-title>leaveDetail</ion-title>
+  </ion-navbar>
+  
+</ion-header>
+
+
+<ion-content padding>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <div >
+    {{DetailedData.userName}}
+    
+    
+    
+    ||  {{DetailedData.mobile}}  ||  {{DetailedData.startDate | date}} || {{DetailedData.endDate | date}} 
+    
+    
+    
+    
+    <form  *ngIf="juiorList == 2" action="" name="form"  #f="ngForm" (ngSubmit)="(f.form.valid) && update_status(DetailedData.approvalStatus,DetailedData.leaveApplicationId)">
+      
+      
+      <ion-item>
+        <ion-label>Status</ion-label>
+        <ion-select name="approvalStatus" [(ngModel)]="DetailedData.approvalStatus">
+          <ion-option [value]="0" >pending</ion-option>
+          <ion-option [value]="1">APPROVED</ion-option>
+          <ion-option [value]="2">rEJECT</ion-option>
+        </ion-select>
+      </ion-item>
+      
+      
+      
+      
+      <ion-item *ngIf="DetailedData.approvalStatus == 2 ">
+        <ion-textarea placeholder="Enter a Reamrks"
+        required
+        name="reason" [(ngModel)]="form.reason" #reason="ngModel"   ></ion-textarea>
+      </ion-item>
+      
+      <div *ngIf="f.submitted " >
+        <div  class=" error-left">Remark is required</div>
+      </div>
+      
+      
+      <button type="submit" name="submit"> SAVE</button>
+      
+      
+    </form>
+    
+  </div>
+</ion-content> -->
+<ion-header class="catalogue-header">
+  
+  <ion-navbar>
+    <ion-title>Leave Detail</ion-title>
+    <ion-buttons end class="login-btn" (click)="goToLeaveadd()">
+      <button ion-button>
+        <i class="material-icons f20">create</i>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  
+</ion-header>
+
+
+<ion-content>
+  
+  <div class="action-btn-2" style="top: 0px;">
+    <div class="top-tab">
+      <div class="cs-button active"><p>Leave</p></div>
+      <div class="cs-button"><p>Detail</p></div>
+    </div>
+  </div>
+  
+  
+  <div class="padding16 pt0">
+    <div class="leave-info">
+      <div class="head">
+        <button class="arrow-button">
+          <i class="material-icons ng-star-inserted">chevron_left</i>
+        </button>
+        <h2>Leave Info 2018-2019</h2>
+        <button class="arrow-button">
+          <i class="material-icons ng-star-inserted">chevron_right</i>
+        </button>
+      </div>
+      <ul>
+        <li>
+          <div class="left-column">Leave Type</div>
+          <div class="right-column">
+            <div class="leave-count">Total</div>
+            <div class="leave-count">Used</div>
+            <div class="leave-count">Pending</div>
+          </div>
+        </li>
+        <li *ngFor="let a of myLeavLeft">
+          <div class="left-column">Sick Leave</div>
+          <div class="right-column">
+            <div class="leave-count"><span class="total">10</span></div>
+            <div class="leave-count"><span class="used">7</span></div>
+            <div class="leave-count"><span class="pending">3</span></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="detail-box" >
+      <div class="heading-text mb0 sticky-heading">
+        <p style="margin-bottom: 0px !important;">Basic Information</p>
+      </div>
+      
+      <div class="table-box">
+        <table>
+          <tr>
+            <th class="w110">Name</th>
+            <td>Himanshu</td>
+          </tr>
+          <tr>
+            <th>Leave Type</th>
+            <td>Test Leave</td>
+          </tr>
+          <tr>
+            <th>Start Date</th>
+            <td>01-08-2019</td>
+          </tr>
+          <tr>
+            <th>End Date</th>
+            <td>05-08-2019</td>
+          </tr>
+          <tr>
+            <th>Leave Status</th>
+            <td class="pending">Pending</td>
+          </tr>
+          <tr>
+            <th>Remark</th>
+            <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+</ion-content>

@@ -1,0 +1,418 @@
+<ion-header class="catalogue-header">
+	<ion-navbar>
+		<ion-title>{{data}} Of {{distributorDetail.establishment}}</ion-title>
+		<ion-buttons end class="login-btn" (click)="presentPopover($event)">
+			<button ion-button >
+				<img class="w4 h16" src="assets/icons/more-option-ic.svg" alt="">
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+		<ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
+		</ion-refresher-content>
+	</ion-refresher>
+	
+	
+	<div *ngIf="data=='Details'">
+		<div class="list">
+			<div class="box light-red-bg relative">
+				<div class="heading border-none">
+					<div class="dist-name dflex">
+						<div class="first-leter w50" style="background: #FF7474">{{distributorDetail?.establishment ? distributorDetail?.establishment[0] : ''}}</div>
+						<div class="name-number">
+							<p>{{distributorDetail.establishment | titlecase }}</p>
+							<div class="text-with-ic dflex">
+								<i class="material-icons text-relat-icon black-clr">call</i>
+								<p><a class="f14" href="tel:{{distributorDetail.mobile}}" >{{distributorDetail.mobile}}</a>,<a class="f14" href="tel:{{distributorDetail.landline}}" >{{distributorDetail.landline}}</a></p>
+							</div>
+							
+							<div class="text-with-ic dflex">
+								<i class="material-icons text-relat-icon black-clr">email</i>
+								<a class="f14 underline mt8" [href]="'mailto:'+ distributorDetail.email + '?Subject=My%20Custom%20Subject'">{{distributorDetail.email}}</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="detail">
+					<p><strong>ADDRESS</strong></p>
+					<p class="f13">{{distributorDetail.street | titlecase }},{{distributorDetail.state | titlecase }},{{distributorDetail.district | titlecase }}, {{distributorDetail.city | titlecase }} {{distributorDetail.pin}}</p>
+				</div>
+				<div class="detail mt16">
+					<p><strong>SHIPPING ADDRESS</strong></p>
+					<p class="f13" *ngFor="let shipp of distributorDetail.shippingAddresses;let i=index">({{i+1}}) - {{shipp.street | titlecase }},{{shipp.state | titlecase }},{{shipp.district | titlecase }}, {{shipp.city| titlecase }} {{shipp.pin}}</p>
+				</div>
+				
+			</div>
+		</div>
+		
+		
+		<div padding-horizontal>
+			<div class="figure-outer">
+				<div class="heading-text m0">
+					<p>Basic Information</p>
+				</div>
+				<div class="cs-list flat">
+					<div class="list-data">
+						<div class="figure">
+							<ul>
+								<li>
+									<span>Distribution Code</span>
+									<p>{{distributorDetail.networkCode | titlecase }}</p>
+								</li>
+								<li>
+									<span>Applicant Name</span>
+									<p>{{distributorDetail.nameOfApplicant | titlecase }}</p>
+								</li>
+								<li>
+									<span>GST Number</span>
+									<p>{{distributorDetail.gst}}</p>
+								</li>
+								<li>
+									<span>PAN Number</span>
+									<p>{{distributorDetail.pan}}</p>
+								</li>
+								<li>
+									<span>Source</span>
+									<p>{{distributorDetail.sourceName | titlecase }}</p>
+								</li>
+								<li>
+									<span>Date Of Birth</span>
+									<p>{{distributorDetail.dateOfBirth | date :'d MMM y'}}</p>
+								</li>
+								<li>
+									<span>Date Of Marriage</span>
+									<p>{{distributorDetail.dateOfMarriage | date :'d MMM y'}}</p>
+								</li>
+								<li>
+									<span>Date Of Commencement</span>
+									<p>{{distributorDetail.dateOfCommencement | date :'d MMM y'}}</p>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div> 
+			<div class="figure-outer">
+				<div class="heading-text m0">
+					<p>Credit Information</p>
+				</div>
+				<div class="cs-list flat">
+					<div class="list-data">
+						<div class="figure">
+							<ul>
+								<li>
+									<span>Credit Limit</span>
+									<p>{{distributorDetail.creditLimit| currency: 'INR':true}}</p>
+								</li>
+								<li>
+									<span>Used</span>
+									<p *ngIf="distributorDetail.creditUsed">{{distributorDetail.creditUsed| currency: 'INR':true}}</p>
+									<p *ngIf="!distributorDetail.creditUsed">--</p>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div> 
+			<div class="figure-outer left-right-16">
+				<div class="heading-text m0 pl16">
+					<p>Yearly Targets </p>
+				</div>
+				<div class="table-list ">
+					<div class="table-head">
+						<table>
+							<tr>
+								<th class="w110">Target Duration</th>
+								<th class="text-right">Amount</th>
+								<th class="text-right">Acheived</th>
+							</tr>
+						</table>
+					</div>
+					<div class="table-body">
+						<table>
+							<tr>
+								<td class="w110">{{networkLimits.financialYear}}</td>
+								<td class="text-right">&#x20B9; {{networkLimits.targetLimit}}</td>
+								<td class="text-right">&#x20B9; {{networkLimits.targetAchieved}}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			
+			<div class="figure-outer left-right-16">
+				<div class="table-list mt25">
+					<div class="heading-text m0" padding-horizontal>
+						<p>Assigned Information</p>
+					</div>
+					<div class="table-head">
+						<table>
+							<tr>
+								<th>Name</th>
+								<th>Role</th>
+							</tr>
+						</table>
+					</div>
+					<div class="table-body">
+						<table>
+							<tr *ngFor=" let assg of distributorDetail.networkSalesUsers">
+								<td>{{assg.salesUserName | titlecase }}</td>
+								<td>{{assg.salesUserRoleName  }}</td>
+							</tr>
+						</table>
+					</div>
+					<div class="table-head">
+						<table>
+							<tr>
+								<th>Segments</th>
+								
+							</tr>
+						</table>
+					</div>
+					<div class="table-body">
+						<table>
+							<tr *ngFor=" let segmnt of distributorDetail.networkSegments">
+								<td>{{segmnt.segmentCode}}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			
+			<div class="figure-outer left-right-16">
+				<div class="table-list ">
+					<div class="heading-text m0" padding-horizontal>
+						<p>Contact Persons</p>
+					</div>
+					<div class="table-head">
+						<table>
+							<tr>
+								<th>Name</th>
+								<th class="w110">Mobile No.</th>
+							</tr>
+						</table>
+					</div>
+					<div class="table-body">
+						<table>
+							<tr *ngFor=" let b of networkContacts">
+								<td>{{b.name | titlecase }}</td>
+								<td class="w110">{{b.mobile1}},{{b.mobile2}}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="figure-outer left-right-16" padding-horizontal>
+				<div class="table-list ">
+					<div class="heading-text m0" >
+						<p>Bank Details</p>
+					</div>
+					<div class="table-box">
+						<table>
+							<tr>
+								<th class="w130">Bank Name</th>
+								<td>{{distributorDetail.bankName}}</td>
+							</tr>
+							<tr>
+								<th>Account Number</th>
+								<td>{{distributorDetail.accountNumber}}</td>
+							</tr>
+							<tr>
+								<th>IFSC Code</th>
+								<td>{{distributorDetail.ifscCode}}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="first-step" *ngIf="data=='Orders'">
+		<div class="nothing-here" *ngIf="orderlist.length==0">
+			<div class="outer">
+				<div class="innear">
+					<img src="assets/imgs/nothing.svg" alt="">
+					<p>Nothing is here</p>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="list padding16">
+			<div class="box" *ngFor=" let order of orderlist ; let i=index">
+				<div class="heading">
+					<div class="dflex" style="align-items: flex-start;">
+						<div class="wp100">
+							<p class="black-clr">{{order.createdByName}}</p>
+						</div>
+					</div>
+					<div class="date">{{order.createdOn |date :'d, MMMM, y'}}</div>
+				</div>
+				
+				<div class="cs-list mt16">
+					<div class="list-data flat-item">
+						<div class="figure top-child padding0">
+							<ul>
+								<li class="wp100">
+									<span>Order No.</span>
+									<p>#{{order.orderNumber}}</p>
+								</li>
+								<li>
+									<span>Quantity</span>
+									<p>{{order.quantity}}</p>
+								</li>
+								<li>
+									<span>Value</span>
+									<p>₹ {{order.amount | currency: 'INR':true}}</p>
+								</li>
+								<li>
+									<span>Dealer Status</span>
+									<p class="draft-clr" *ngIf="order.dealerStatus=='1'">Draft</p>
+									<p class="pending-clr" *ngIf="order.dealerStatus=='2'">Pending</p>
+									<p class="approved-clr" *ngIf="order.dealerStatus=='3'">Approved</p>
+								</li>
+								<li>
+									<span>Company Status</span>
+									<p class="pending-clr" *ngIf="order.companyStatus=='1'">Pending</p>
+									<p class="approved-clr" *ngIf="order.companyStatus=='2'">Approved</p>
+									<p class="hold-clr" *ngIf="order.companyStatus=='3'">Hold</p>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="second" *ngIf="data=='Concerns'">
+		<div class="nothing-here" *ngIf="concernList.length==0">
+			<div class="outer">
+				<div class="innear">
+					<img src="assets/imgs/nothing.svg" alt="">
+					<p>Nothing is here</p>
+				</div>
+			</div>
+		</div>
+		<div class="list" >
+			<div class="box complete" *ngFor=" let concern of concernList ; let i=index" >
+				<div class="heading" >
+					<div class="content">{{concern.claimNo}}</div>
+					<div class="date">{{concern.createdOn |date :'d, MMM, y'}}</div>
+				</div>
+				
+				<div class="description">
+					<div class="content-flex">
+						<a class="cust-name">{{concern.networkEstablishment}}</a>
+						<p class="type">{{concern.concernStatusName}} </p>
+					</div>
+				</div>
+				
+				<div class="figure-outer mb6 mt16">
+					<div class="figure-innear dflex white-bg">
+						<div class="cs-figure border-left">
+							<p>Concern Type</p>
+							<p class="black-clr">{{concern.concernTypeName}}</p>
+						</div>
+						<div class="cs-figure border-left">
+							<p>Total Item</p>
+							<p>{{concern.productConcerns.length}}</p>
+						</div>
+					</div>
+				</div> 
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="four" *ngIf="data=='Pop & Gifts'">
+		<div class="nothing-here" *ngIf="popOrderData.length==0">
+			<div class="outer">
+				<div class="innear">
+					<img src="assets/imgs/nothing.svg" alt="">
+					<p>Nothing is here</p>
+				</div>
+			</div>
+		</div>
+		<ion-card *ngFor=" let pop of popOrderData ; let i=index">
+			<div class="nothing-here" *ngIf="popOrderData.length==0">
+				<div class="outer">
+					<div class="innear">
+						<img src="assets/imgs/nothing.svg" alt="">
+						<p>Nothing is here</p>
+					</div>
+				</div>
+			</div>
+			<img src="assets/imgs/4.jpg"/>
+			<ion-card-content>
+				<ion-card-title class="card-name">
+					{{pop.establishment}}
+				</ion-card-title>
+				<div class="figure-outer mb0">
+					<div class="figure-innear dflex white-bg">
+						<div class="cs-figure border-left">
+							<p>Date</p>
+							<p class="black-clr">{{pop.createdOn |date:'d,MMM,y'}}</p>
+						</div>
+						<div class="cs-figure border-left">
+							<p>Gift Name</p>
+							<p class="black-clr"><span  *ngFor=" let name of pop.orderedItems" >{{name.name}},</span></p>
+						</div>
+						<div class="cs-figure border-left">
+							<p>Item.</p>
+							<p>{{pop.orderedItems.length}}</p>
+						</div>
+					</div>
+				</div> 
+			</ion-card-content>
+		</ion-card>
+	</div>
+	
+	
+	<div class="five"  *ngIf="data=='Image & Documents'">
+		<div class="nothing-here" *ngIf="documentListData.length==0">
+			<div class="outer">
+				<div class="innear">
+					<img src="assets/imgs/nothing.svg" alt="">
+					<p>Nothing is here</p>
+				</div>
+			</div>
+		</div>
+		<ion-card *ngFor="let doc of documentListData">
+			<img src="assets/imgs/4.jpg"/>
+			<ion-card-content>
+				<ion-card-title class="card-name">
+					Abacusdesk IT Solution Pvt. Ltd
+				</ion-card-title>
+				<div class="figure-outer mb0">
+					<div class="figure-innear dflex white-bg">
+						<div class="cs-figure border-left">
+							<p>Date</p>
+							<p class="black-clr">{{doc.createdOn|date :'d MMM y'}}</p>
+						</div>
+						<div class="cs-figure border-left">
+							<p>Doc. Name</p>
+							<p class="black-clr">{{doc.documentName}}</p>
+						</div>
+						<div class="cs-figure border-left text-center">
+							<a class="delete"(click)="deletedoc(doc.documentId)">
+								<i class="material-icons lred-clr" >delete_sweep</i>
+							</a>
+						</div>
+					</div>
+				</div> 
+			</ion-card-content>
+		</ion-card>
+	</div>
+	
+	
+	
+	<div class="h50"></div>
+</ion-content>

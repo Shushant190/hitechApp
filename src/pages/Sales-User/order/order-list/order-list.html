@@ -1,0 +1,129 @@
+<ion-header class="catalogue-header bg-af-none">
+	<ion-navbar>
+		<ion-title>
+			
+			<div class="flex-tittle" >
+				<p>All Order</p>
+				<!-- <span class="count">20</span> -->
+			</div>
+		</ion-title>
+		
+		
+		<ion-buttons end class="login-btn" (click)="presentPopover($event)">
+			<button ion-button >
+				<img class="w4 h16" src="assets/icons/more-option-ic.svg" alt="">
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div class="filter-search">
+		<ion-searchbar placeholder="Search" #input [(ngModel)]="data.search" (input)="onSearchChangeHanlder()" (ionChange)="onClearSearchHandler()"></ion-searchbar>
+	</div>
+	
+
+
+	<div class="action-btn-2">
+		
+			<div class="top-tab">
+					<div class="cs-button " [ngClass] = "TabsValue == 1 ? 'active':'' "    (click)="onOrderTypeHandler('All' ,1); scrollToTop()"  ><p>All <span class="counter">0</span></p></div>
+					<div class="cs-button"   [ngClass] = "TabsValue == 2 ? 'active':'' "   (click)="onOrderTypeHandler('Approve', 2) ; scrollToTop() "  ><p> Approved<span class="counter">0</span></p></div>
+					<div class="cs-button" [ngClass] = "TabsValue == 3 ? 'active': ''"  (click)="onOrderTypeHandler('Pending', 3) ; scrollToTop() "  ><p>Pending <span class="counter">0</span></p></div>
+					<div class="cs-button"  [ngClass] = "TabsValue == 4 ?'active' : ''"  (click)="onOrderTypeHandler('Hold' ,4) ; scrollToTop() "   ><p>Hold <span class="counter">10</span></p></div>
+					<div class="cs-button" [ngClass] = "TabsValue == 5 ? 'active' : ''"   (click)="onOrderTypeHandler('Reject', 5) ; scrollToTop() "   ><p>Reject <span class="counter">10</span></p></div>
+				</div>
+
+		<!-- <div class="head-count pt8">
+			{{orderType}}
+			<span class="top-counter">{{orderList?.length ? orderList?.length : '0'}}</span>
+			
+			<div class="cs-button active">  <span>{{orderType}} {{orderList?.length ? '('+orderList?.length + ')' : ''}}</span></div>
+			<div class="cs-button" ><span>Drafts</span></div>
+		</div> -->
+	</div> 
+	
+	
+	<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+		<ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
+		</ion-refresher-content>
+	</ion-refresher>
+	
+	<!-- <div class="nothing-here" *ngIf="!isRequestInProcess && orderList.length==0">
+		<div class="outer">
+			<div class="innear">
+				<img src="assets/imgs/nothing.svg" alt="">
+				<p>Nothing is here</p>
+			</div>
+		</div>
+	</div> -->
+	
+	<div class="list pl16 pr16 pl16">
+		
+		<div class="box" *ngFor="let a of orderList" (click)="goOnDetailPage(a.orderId)">
+			<div class="heading">
+				<div class="dflex" style="align-items: flex-start;">
+					<div class="wp100">
+						<p class="black-clr">{{a.establishment | titlecase }}</p>
+					</div>
+				</div>
+				<div class="date">{{a.createdOn | date: 'dd MMM yyyy'}}</div>
+			</div>
+			<!-- <div class="description description-box">
+				<div class="content-flex">
+					<a class="cust-name">{{a.establishment | titlecase }}</a>
+				</div>
+			</div> -->
+			
+			<div class="cs-list mt16">
+				<div class="list-data flat-item">
+					<div class="figure top-child padding0">
+						<ul>
+							<li class="wp100">
+								<span>Order No.</span>
+								<p>{{a.orderNumber ? a.orderNumber : 'n/a'}}</p>
+							</li>
+							<li>
+								<span>Quantity</span>
+								<p>{{a.quantity}}</p>
+							</li>
+							<li>
+								<span>Value</span>
+								<p>₹ {{a.amount}}</p>
+							</li>
+							<li>
+								<span>Dealer Status</span>
+								<p class="draft-clr" *ngIf="a.dealerStatus=='1'">Draft</p>
+								<p class="pending-clr" *ngIf="a.dealerStatus=='2'">Pending</p>
+								<p class="approved-clr" *ngIf="a.dealerStatus=='3'">Approved</p>
+							</li>
+							<li>
+								<span>Company Status</span>
+								<p class="pending-clr" *ngIf="a.companyStatus=='1'">Pending</p>
+								<p class="approved-clr" *ngIf="a.companyStatus=='2'">Approved</p>
+								<p class="hold-clr" *ngIf="a.companyStatus=='3'">Hold</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+	</div>
+	
+	<div class="h20"></div>
+
+
+	<ion-fab class="no-radius-btn" right bottom  (click)="scrollToTop()">
+		<button ion-fab color="vibrant" *ngIf="show"><i class="material-icons">expand_less</i></button>
+	</ion-fab>
+
+	<!-- *ngIf="variableForScroll == false" -->
+<ion-infinite-scroll (ionInfinite)="InfiniteScrollFunction($event)" *ngIf="variableForScroll == false"      >
+		<ion-infinite-scroll-content></ion-infinite-scroll-content>
+	  </ion-infinite-scroll>
+
+
+
+</ion-content>

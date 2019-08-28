@@ -1,0 +1,58 @@
+{
+  "_from": "git+https://github.com/shaik305/cordova-plugin-image-picker.git",
+  "_id": "cordova-plugin-image-picker@1.1.3",
+  "_inBundle": false,
+  "_integrity": "",
+  "_location": "/cordova-plugin-image-picker",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "https://github.com/shaik305/cordova-plugin-image-picker.git",
+    "rawSpec": "https://github.com/shaik305/cordova-plugin-image-picker.git",
+    "saveSpec": "git+https://github.com/shaik305/cordova-plugin-image-picker.git",
+    "fetchSpec": "https://github.com/shaik305/cordova-plugin-image-picker.git",
+    "gitCommittish": null
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "git+https://github.com/shaik305/cordova-plugin-image-picker.git#8f089d881c27295bebacee7f4e21c91fdab0994b",
+  "_spec": "https://github.com/shaik305/cordova-plugin-image-picker.git",
+  "_where": "/var/www/html/kenshin_data/kenshin_app",
+  "author": {
+    "name": "Wymsee"
+  },
+  "bugs": {
+    "url": "https://github.com/wymsee/cordova-imagePicker/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "cordova-plugin-image-picker",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "deprecated": false,
+  "description": "This plugin allows selection of multiple images from the camera roll / gallery in a phonegap app",
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=4.0.0"
+    }
+  ],
+  "homepage": "https://github.com/wymsee/cordova-imagePicker#readme",
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android"
+  ],
+  "license": "MIT",
+  "name": "cordova-plugin-image-picker",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shaik305/cordova-plugin-image-picker.git"
+  },
+  "version": "1.1.3"
+}

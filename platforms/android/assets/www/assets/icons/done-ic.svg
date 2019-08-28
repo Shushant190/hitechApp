@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ff7474;
+        stroke: #ff7474;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        stroke: none;
+      }
+
+      .cls-4 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="Group_31" data-name="Group 31" transform="translate(-1503 -353)">
+    <g id="Rectangle_804" data-name="Rectangle 804" class="cls-1" transform="translate(1503 353)">
+      <rect class="cls-3" width="24" height="24" rx="12"/>
+      <rect class="cls-4" x="0.5" y="0.5" width="23" height="23" rx="11.5"/>
+    </g>
+    <path id="ic_check_24px" class="cls-2" d="M8,14.269,4.575,10.848,3.41,12,8,16.59l9.843-9.843L16.682,5.59Z" transform="translate(1504.59 354.41)"/>
+  </g>
+</svg>

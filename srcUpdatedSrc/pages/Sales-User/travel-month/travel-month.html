@@ -1,0 +1,168 @@
+<ion-header class="catalogue-header">
+  <ion-navbar>
+    <ion-title>Travel Month</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+
+  <form  #f="ngForm">
+
+    <div class="padding16 pt0">
+
+      <div class="action-btn-2 padding0 pt16 pb16" style="top: 0px;">
+
+        <div class="cs-list">
+          <div class="list-data flat-item">
+            <div class="figure  padding0">
+              <div class="main-heading">
+                <h2>Basic Details</h2>
+              </div>
+              
+              <ul>
+                <li class="wp100" *ngIf="travelPlanID && data.createBy != userId">
+                  <span>User Name</span>
+                  <p>{{data.userName}}</p>
+                </li>
+                
+                <li>
+                  <span >year</span>
+                  <p> {{data.year}}</p>
+                </li>
+                <li >
+                  <span >Month</span>
+                  <p *ngIf="data.travelPlanID!=''"> {{selectedMonthName}}</p>
+                  <p *ngIf="!data.travelPlanID"> {{data.month}}</p>
+                </li>
+                <li>
+                  <span>Travel Budget</span>
+                  <p> &#x20B9;{{data.travelBudget}}</p>
+                </li>
+                <li >
+                  <span>Sales Budget</span>
+                  <p> &#x20B9;{{data.salesBudget}}</p>
+                </li>
+                <li *ngIf="data.status==4">
+                  <span>Status</span>
+                  <p>Rejected</p>
+                </li>
+                <li *ngIf="data.status==4">
+                  <span>Rejected By</span>
+                  <p>{{data.travelRejectedByName}}</p>
+                </li>
+                <li  class="wp100" *ngIf="data.status==4">
+                  <span> Rejection Reason </span>
+                  <p>{{data.travelRejectionReason}}</p>
+                </li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cs-collaps" >
+
+        <div *ngIf="data.travelPlanID" class="toggle-header">
+            <p>*Dates With No Plans Are Colored! </p>
+            <!-- <ion-item><ion-toggle color="tertiary" [(ngModel)]="data.isAllDateView"></ion-toggle></ion-item> -->
+        </div>
+
+        <ul class="collapsible mb4">
+
+          <li *ngFor="let row of monthDayWisePlanArr; let parentIndex = index;">
+
+            <div [ngClass]="!row.details || row.details.length == 0 ? 'empty-date' : ''" class="collapsible-header">{{row.planDate | date :'EEEE, MMMM d, y'}}</div>
+            <div class="collapsible-body">
+              <div class="sales-seltion-field m0">
+          
+          <a class="add-more"  [hidden]="data && data['travelPlanID'] && data['createBy'] != userId" (click)="onDateAddPlanHandler(row.planDate,data.travelPlanID)">To Add New Plan, Click Here</a>
+          
+          <div class="table-box">
+            <table *ngFor="let detail of row.details; let childIndex = index">
+              <tr>
+                <th class="w110">State</th>
+                <td>{{detail.state}}</td>
+              </tr>
+              <tr>
+                <th>District</th>
+                <td>{{detail.district}}</td>
+              </tr>
+              <tr>
+                <th>City</th>
+                <td>{{detail.city}}</td>
+              </tr>
+              <tr>
+                <th>Sales Activity</th>
+                <td>{{detail.isSalesActivity}}</td>
+              </tr>
+              <tr *ngIf="detail.isSalesActivity=='Yes'">
+                <th>Activity Type</th>
+                <td>{{detail.activityTypeName}}</td>
+              </tr>
+              <tr *ngIf="detail.isSalesActivity=='Yes'">
+                <th>Sales Budget</th>
+                <td>&#x20B9; {{detail.salesBudget}}</td>
+              </tr>
+
+              <tr>
+                <th>Action</th>
+                <td>
+                  <div class="action">
+
+                      <a class="edit"  [hidden]="data && data['travelPlanID'] && data['createBy'] != userId" (click)="onUpdateDatePlanHandler(parentIndex, childIndex, data.travelPlanID, row.planDate, detail)">
+                        Edit
+                      </a>
+
+                      <a class="del" [hidden]="data && data['travelPlanID'] && data['createBy'] != userId" (click)="removePlan(parentIndex,indx,detail.travelDetailId)">
+                        Delete
+                      </a>
+                  </div>
+                </td>
+              </tr>
+
+            </table>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</div>
+
+</form>
+
+<div *ngIf="travelPlanType==2">
+  <form (ngSubmit)="g.form.valid && updatestatus()" #g="ngForm" novalidate>
+    <div class="cs-btn border-none text-center" *ngIf="data.status==2 && data.travelApprover==userId">
+      <ion-item class="mt0">
+        <ion-label>Select Travel Plan Status</ion-label>
+        <ion-select name ="reject"  [(ngModel)]="updateStatusData.status" required>
+          <ion-option value=3>Approve</ion-option>
+          <ion-option value=4>Reject</ion-option>
+        </ion-select> 
+      </ion-item>
+      
+      
+      <ion-item *ngIf="updateStatusData.status==4">
+        <ion-label>Remark </ion-label>
+        <ion-textarea  name="travelRejectionReason" [(ngModel)]="updateStatusData.travelRejectionReason"  required></ion-textarea>
+      </ion-item>
+      
+      <button ion-button color="secondary"[disabled]="updateStatusData.reject==4?!updateStatusData.travelRejectionReason:false" >Update Status</button>
+    
+    </div>
+  </form>
+</div>
+</ion-content>
+
+<ion-footer padding>
+
+  <div *ngIf="travelPlanType!=2 && !data.travelPlanID" class="cs-btn border-none text-center">
+
+      <button *ngIf="!travelPlanID"  ion-button color="secondary" (click)="data.status=1;saveTravelPlanHandler()">Save As Draft</button>
+
+      <button  ion-button color="secondary" (click)="data.status=2;saveTravelPlanHandler()">Save For Approval</button>
+
+  </div>
+
+</ion-footer>
+

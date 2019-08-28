@@ -1,0 +1,62 @@
+<ion-header  class="catalogue-header">
+  <ion-navbar>
+    <ion-title>Create Travel Plan</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <form (ngSubmit)="f.form.valid && goToTravelMonthl()" #f="ngForm" novalidate>
+    <div class="step-3 ul-clear">
+      <div class="cs-form">
+        <div>
+          <label>Select Year</label>
+          <ion-item class="form-field">
+            <ion-select name="year" #year="ngModel" (ionChange)="divmonth(data.year)" [(ngModel)]="data.year" [ngClass]="{ 'is-invalid': f.submitted && year.invalid }" required>
+              <ion-option  *ngFor="let year of yearArray" value={{year}}>{{year}}</ion-option>
+            </ion-select> 
+          </ion-item>
+          <div *ngIf="f.submitted && year?.invalid || year?.touched && year?.invalid">
+            <p class="error-left">year is required....</p>
+          </div>
+        </div>
+        
+        <div>
+          <label>Select Month</label>
+          <ion-item class="form-field">
+            <ion-select  name="month" #month="ngModel" [(ngModel)]="data.month" (ionChange)="onCheckMonthExistHandler()" [ngClass]="{ 'is-invalid': f.submitted && month.invalid }"required>
+
+              <ion-option *ngFor="let day of monthArray;let i=index" value={{day}}>{{day}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <div *ngIf="f.submitted && month?.invalid || month?.touched && month?.invalid">
+            <p class="error-left">Month is required....</p>
+          </div>
+        </div>
+        
+        
+        <!-- <div>
+          <label>Travel Budget </label>
+          <ion-item class="form-field">
+            <ion-input  type="number" name="travelBudget" #travelBudget="ngModel"  [(ngModel)]="data.travelBudget" [ngClass]="{ 'is-invalid': f.submitted && travelBudget.invalid }"  required></ion-input>
+          </ion-item>
+          
+          <div *ngIf="f.submitted && travelBudget.invalid || travelBudget.touched && travelBudget.invalid">
+            <p class="error-left">travel Budget is required....</p>
+          </div>
+        </div> -->
+        
+        <!-- <div>
+          <label>Sales Budget : <span>{{data.salesBudget}}</span> </label> -->
+          <!-- <ion-item class="form-field">
+            <ion-input type="number" readonly placeholder="Sales Budget" #salesBudget="ngModel" name="salesBudget" [(ngModel)]="data.salesBudget" required></ion-input>
+          </ion-item> -->
+        <!-- </div> -->
+        
+      </div>
+      <div class="cs-btn border-none m16 mt0 right-btn" >
+        <button ion-button color="secondary" round >NEXT<i class="material-icons pl30">trending_flat</i></button>
+      </div>
+    </div>
+  </form>
+</ion-content>

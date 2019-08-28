@@ -1,0 +1,77 @@
+<ion-header class="catalogue-header bg-af-none">
+	<ion-navbar>
+		<ion-title>Distribution Network</ion-title>
+		
+	</ion-navbar>
+</ion-header>
+<ion-content>
+
+	<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+		<ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
+		</ion-refresher-content>
+	</ion-refresher>
+
+
+		<div class="filter-search">
+				<ion-searchbar placeholder="Search" #input [(ngModel)]="data.search" (input)="onSearchChangeHanlder()" (ionChange)="onClearSearchHandler()"></ion-searchbar>
+		</div>
+		
+	
+		<div class="list" padding>
+			<div class="box  relative" (click)="goToDdetail(a.networkId,a.userId)"  *ngFor="let a of DistriButionList"> 
+				<div class="heading">
+					<div class="dist-name dflex">
+						<div class="first-leter" style="background: #FF7474;">{{a.establishment[0]}}</div>
+						<div class="top-content">
+							<h2 class="f13" style="font-weight: 600;">{{a.establishment | titlecase}}</h2>
+							<a href="tel:{{a.mobile}}">{{a.mobile}}</a>
+						</div>
+						<div class="date">{{a.createdOn | date: 'dd MMM yyyy'}}</div>
+					</div>
+				</div>
+
+				<div class="mid-content pb0">
+						<p><strong>Applicant Name : </strong> {{a.nameOfApplicant | titlecase  }}</p>
+						<p><strong>Segments : </strong> <span>{{a.segmentStr  | titlecase  }}</span></p>
+				</div>
+				
+				<div class="text-with-ic dflex">
+					<i class="material-icons text-relat-icon">place</i>
+					<p>{{a.state  | titlecase  }}, {{a.district  | titlecase  }}, {{a.pin}}</p>
+				</div>
+				<div class="right-arrow"><ion-icon name="ios-arrow-forward-outline"></ion-icon></div>
+			</div>
+		</div>
+
+
+		<div class="list" *ngIf="div==true" padding>
+			<div class="nothing-here" >
+				<div class="outer">
+					<div class="innear">
+						<img src="assets/imgs/nothing.svg" alt="">
+						<p>Nothing is here</p>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+		<!-- <ion-fab class="no-radius-btn" right bottom>
+				<button ion-fab color="vibrant"><i class="material-icons">expand_less</i></button>
+			</ion-fab> -->
+
+
+			
+<ion-fab class="no-radius-btn" right bottom  (click)="scrollToTop()">
+	<button ion-fab color="vibrant" *ngIf="show"><i class="material-icons">expand_less</i></button>
+</ion-fab>
+
+
+			<ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="variableForScroll == false" >
+				<ion-infinite-scroll-content></ion-infinite-scroll-content>
+			  </ion-infinite-scroll>
+			  
+	
+	</ion-content>
+	

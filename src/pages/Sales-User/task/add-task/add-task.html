@@ -1,0 +1,116 @@
+<!--
+  Generated template for the AddTaskPage page.
+  
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="catalogue-header">
+  
+  <ion-navbar>
+    <ion-title>Add Task</ion-title>
+  </ion-navbar>
+  
+</ion-header>
+
+
+<ion-content  class="after-none" padding>
+  <!-- Basic Information Start -->
+  
+  <div class="step-2 ul-clear">
+    <form name="form" #d="ngForm" id="taskForm" (ngSubmit)="(d.form.valid) && saveTask()">
+      
+      <div class="main-heading">
+        <h2>Basic Information</h2>
+      </div>
+      <div class="cs-form">
+        <label>Select Role Type</label>
+        <ion-item class="form-field">
+          <ion-select name="role" [(ngModel)]="form.role"
+          [ngClass]="{'is-invalid' : d.submitted && role.invalid}"
+          #role="ngModel" required (ngModelChange)="userList(form.role)"  >
+          <ion-option  *ngFor="let a of AllUserList" value="{{a.roleId}}" >{{a.roleName}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <div *ngIf="d.submitted && role.invalid" >
+        <div  class=" error-left">role is required</div>
+      </div> 
+      
+      <label>Select User</label>
+      <ion-item class="form-field">
+        <ionic-selectable 
+        item-content
+        [items]="saleslist"
+        itemValueField="userId"
+        itemTextField="userName"
+        [canSearch]="true"
+        [isMultiple]="true"
+        name="user"
+        [(ngModel)]="form.user"
+        >
+      </ionic-selectable>
+    </ion-item>
+    
+    <div *ngIf="d.submitted && user.invalid" >
+      item-content
+      <div  class=" error-left">user is required</div>
+    </div> 
+    
+    <label>To Be Completed Date</label>
+    <ion-item class="form-field">
+      <ion-datetime display-format="MMM DD, YYYY HH:mm"  [min]="TodayDate" 
+      name="date" [(ngModel)]="form.date"   
+      [ngClass]="{'is-invalid' : d.submitted && date.invalid}"
+      #date="ngModel" required></ion-datetime>
+    </ion-item>
+    
+    <div *ngIf="d.submitted && date.invalid" >
+      <div  class=" error-left">date is required</div>
+    </div> 
+    
+    
+    <label>Critical</label>
+    <ion-item class="form-field">
+      <ion-select name="country"  name="taskPriority" [(ngModel)]="form.taskPriority" #taskPriority="ngModel" [ngClass]="{'is-invalid' : d.submitted && taskPriority.invalid}" required >
+        <ion-option value="1">Currently Critical</ion-option>
+        <ion-option value="2">Potentially Critical</ion-option>
+        <ion-option value="3">Necessary</ion-option>
+        <ion-option value="4">Recommended </ion-option>
+      </ion-select>
+    </ion-item>
+    <div *ngIf="d.submitted && taskPriority.invalid" >
+      <div  class=" error-left">Task Priority is required</div>
+    </div> 
+    <div class="condittion">
+      <ul>
+        <li *ngIf="form.taskPriority==1">Financial loss and Safety Related issues</li>
+        <li *ngIf="form.taskPriority==2">Potential Financial or reputation loss, relationships with customer, statutory requirements</li>
+        <li *ngIf="form.taskPriority==3">Policies and instructions from management</li>
+        <li *ngIf="form.taskPriority==4">All others (no business impact)</li>
+      </ul>
+    </div>
+    
+    
+    <label>Remark </label>
+    <ion-item class="form-field">
+      <ion-textarea  name="remark" [(ngModel)]="form.remark"  #remark="ngModel"  [ngClass]="{'is-invalid' : d.submitted && remark.invalid}" required></ion-textarea>
+    </ion-item>
+    <div *ngIf="d.submitted && remark.invalid" >
+      <div  class=" error-left">remark is required</div>
+    </div>
+    
+    <div class="cs-btn border-none mt16 right-btn">
+      <button ion-button color="secondary" round style="padding-right: 30px !important;">SAVE</button>
+    </div>
+    
+  </div>
+</form>
+</div>
+
+<!-- Basic Information End -->
+</ion-content>
+
+<ion-footer padding>
+    <div class="cs-btn border-none">
+        <button ion-button color="secondary" round class="wp100">SAVE</button>
+      </div>
+</ion-footer>

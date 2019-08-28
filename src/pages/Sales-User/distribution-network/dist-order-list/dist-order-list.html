@@ -1,0 +1,98 @@
+<ion-header class="catalogue-header">
+	<ion-navbar>
+		<ion-title>Pawan Sharma / Orders</ion-title>
+		<!-- <ion-buttons end class="login-btn">
+			<button ion-button>
+			 </button>
+		</ion-buttons> -->
+		<ion-buttons end class="login-btn" (click)="presentPopover($event)">
+				<button ion-button>
+					<img class="w4 h16" src="assets/icons/more-option-ic.svg" alt="">
+				</button>
+			</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	
+	<div class="list">
+		<div class="box complete">
+			<div class="heading">
+				<div class="order-content wp100">
+					<p class="font10 grey-clr">Company Status</p>
+					<p class="color-font">Complete</p>
+				</div>
+				<h1 class="dark-clr line-height">12 Dec 2019</h1>
+			</div>
+			<div class="figure-outer mb6 mt16">
+				<div class="figure-innear dflex white-bg">
+					<div class="cs-figure">
+						<p>Order Id</p>
+						<p>#865842</p>
+					</div>
+					<div class="cs-figure border-left">
+						<p>Value</p>
+						<p>&#8377; 3225.00</p>
+					</div>
+					<div class="cs-figure border-left">
+						<p>Outstanding</p>
+						<p class="black-clr">Approved</p>
+					</div>
+				</div>
+			</div> 
+		</div>
+		
+		<div class="box pending">
+			<div class="heading">
+				<div class="order-content wp100">
+					<p class="font10 grey-clr">Company Status</p>
+					<p class="color-font">Pending</p>
+				</div>
+				<h1 class="dark-clr line-height">12 Dec 2019</h1>
+			</div>
+			<div class="figure-outer mb6 mt16">
+				<div class="figure-innear dflex white-bg">
+					<div class="cs-figure">
+						<p>Order Id</p>
+						<p>#865842</p>
+					</div>
+					<div class="cs-figure border-left">
+						<p>Value</p>
+						<p>&#8377; 2500.00</p>
+					</div>
+					<div class="cs-figure border-left">
+						<p>Dealer Status</p>
+						<p class="black-clr">Approved</p>
+					</div>
+				</div>
+			</div> 
+		</div>
+		
+		<div class="box complete">
+			<div class="heading">
+				<div class="order-content wp100">
+					<p class="font10 grey-clr">Company Status</p>
+					<p class="color-font">Complete</p>
+				</div>
+				<h1 class="dark-clr line-height">12 Dec 2019</h1>
+			</div>
+			<div class="figure-outer mb6 mt16">
+				<div class="figure-innear dflex white-bg">
+					<div class="cs-figure">
+						<p>Order Id</p>
+						<p>#865842</p>
+					</div>
+					<div class="cs-figure border-left">
+						<p>Value</p>
+						<p>&#8377; 2500.00</p>
+					</div>
+					<div class="cs-figure border-left">
+						<p>Dealer Status</p>
+						<p class="black-clr">Pending</p>
+					</div>
+				</div>
+			</div> 
+		</div>
+	</div>
+	
+</ion-content>

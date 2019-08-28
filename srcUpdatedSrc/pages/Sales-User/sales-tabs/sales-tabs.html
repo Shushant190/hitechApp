@@ -1,0 +1,10 @@
+<ion-tabs class="cs-tabs">
+  <ion-tab [root]="tab1Root" tabTitle="HOME" tabIcon="cs-home"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="DIS.NET." tabIcon="cs-dist-net"></ion-tab>
+  <ion-tab [root]="tab3Root"></ion-tab>
+  <ion-fab bottom center slot="fixed" class="plus-btn action-sheets-basic-page">
+    <button (click)="presentActionSheet()" ion-fab color="light"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+  <ion-tab [root]="tab4Root" tabTitle="ORDERS" tabIcon="cs-order"></ion-tab>
+  <ion-tab [root]="tab5Root" tabTitle="MENU" tabIcon="cs-menu"></ion-tab>
+</ion-tabs>

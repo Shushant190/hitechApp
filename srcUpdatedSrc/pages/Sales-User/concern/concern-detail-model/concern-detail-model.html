@@ -1,0 +1,142 @@
+<!--
+  Generated template for the ConcernDetailModelPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>concernDetailModel</ion-title>
+    
+    <ion-buttons end class="login-btn" (click)="closeConcernPopUp()">
+        <button ion-button>
+          <img class="w17" src="assets/icons/cross.svg">
+        </button>
+      </ion-buttons>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<!-- <ion-content padding> -->
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- <div *ngFor="let a of productInfo">
+
+
+
+   <p> invoiceNumber {{a. invoiceNumber}}</p><br>
+    <p> Amount {{a. netAmount}}</p><br>
+    <p> Remark {{a. networkRemarks}}</p><br>
+    <p> invoiceNumber {{a. invoiceNumber}}</p><br>
+    <p> partNumber {{a. partNumber}}</p><br>
+    <p> productName {{a. productName}}</p><br>
+
+    <p> qunatity {{a. qunatity}}</p><br>
+    <p> salesRemarks {{a. salesRemarks}}</p><br>
+    <p> segmentCode {{a. segmentCode}}</p><br>
+    <p> verified {{a. verified}}</p><br>
+
+    
+    
+  </div> -->
+<!-- </ion-content> -->
+
+
+<ion-content padding>
+    <div class="detail-box">
+      <div class="table-box">
+        <table *ngFor="let a of productInfo">
+         
+            <tr>
+                <th class="w110">Category No.</th>
+                <td>{{a.category}}</td>
+              </tr>
+          <tr>
+            <th class="w110">Part No.</th>
+            <td>{{a.partNumber}}</td>
+          </tr>
+          <tr>
+            <th>Segment</th>
+            <td>{{a.segmentCode}}</td>
+          </tr>
+          <tr>
+            <th>Invoice</th>
+            <td>{{a.invoiceNumber}}</td>
+          </tr>
+          <tr>
+            <th>MFG Date</th>
+            <td>{{a.mfgDate |date:'d MMM y' }}</td>
+          </tr>
+          <tr>
+            <th>Claim Qty</th>
+            <td>{{a.acceptedQuantity}}</td>
+            <!-- <td>&#x20B9; NA</td> -->
+          </tr>
+          <tr>
+            <th>SAccept Qty	</th>
+            <td>{{a.rejectedQuantity}}</td>
+          </tr>
+          <tr>
+            <th>SReject Qty</th>
+            <td>{{a.qunatity}}</td>
+          </tr>
+          <tr>
+            <th>Rate</th>
+            <td>&#x20B9; {{a.netAmount}}</td>
+          </tr>
+          <tr>
+            <th>Sales Remark</th>
+            <td>{{a.salesRemarks}}</td>
+          </tr>
+
+          <tr>
+              <th>Dealer  Remark</th>
+              <!-- <td>{{a.salesRemarks}}</td> -->
+            </tr>
+
+
+         
+
+         
+        </table>
+       
+      </div>
+  
+    
+    </div>
+    <form name ="form"  #f="ngForm" novalidate>
+        Dealer Remark  <input type ="text" name="dealerremark" [(ngModel)]="status.dealerremark"> <br>
+
+        Sales Remark  <input type ="text" name="salesremark" [(ngModel)]="status.salesremark">
+
+        <button type ="button" (click)="a()">
+            Save data 
+            </button>
+      </form>
+  </ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+

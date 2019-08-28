@@ -1,0 +1,444 @@
+<!--
+  Generated template for the OutstationAddExpPage page.
+  
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header  class="catalogue-header">
+  
+  <ion-navbar>
+    <ion-title>Outstation Travel</ion-title>
+    <ion-buttons end class="login-btn" (click)="goToOutStationAddListPage()">
+      <button ion-button class="notifications">
+        <img class="w35" src="assets/icons/list.svg">
+        
+        <span *ngFor="let row of outstationTypeArr" >
+          <span *ngIf="outstationType==row.typeId" class="counter">{{expenseCartArr[row.name] && expenseCartArr[row.name].length ? expenseCartArr[row.name].length : 0}}</span>
+        </span>
+        
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  
+</ion-header>
+
+<ion-content class="pr16 pl16 pb16">
+  <div class="action-btn-2" style="top: 0px;">
+    <div class="top-tab">
+      <button class="cs-button" *ngFor="let row of outstationTypeArr" [ngClass]="{'active': outstationType == row.typeId}" (click)="goToTypeHanlder(row.typeId)"><p>{{row.name}}</p></button>
+    </div>
+  </div>
+  
+  
+  <form *ngIf="outstationType == 1" id="travelForm" [formGroup]="travelForm">
+    
+    <div class="first step-2 ul-clear">
+      <div class="cs-form m16">
+        <div>
+          <label>Mode Of Travel</label>
+          <ion-item class="form-field">
+            <ion-select name="modeOfTravel"  formControlName="modeOfTravel" [(ngModel)]="travelData.modeOfTravel" >
+              <ion-option *ngFor="let row of modeTravelArr" [value]="row.typeId">{{row.name}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <p *ngIf="travelForm.get('modeOfTravel').hasError('required') && travelForm.get('modeOfTravel').touched" class="error-left relative">Travel Mode required!</p>
+        </div>
+        
+        <div>
+          <label>Class</label>
+          <ion-item class="form-field">
+            <ion-select name="class" formControlName="class" [(ngModel)]="travelData.class">
+              <ion-option *ngIf="travelData.modeOfTravel==1">AC Buses</ion-option>
+              <ion-option *ngIf="travelData.modeOfTravel==1">Non - AC Buses</ion-option>
+              <ion-option *ngIf="travelData.modeOfTravel==2">2A</ion-option>
+              <ion-option *ngIf="travelData.modeOfTravel==2">3A</ion-option>
+              <ion-option *ngIf="travelData.modeOfTravel==2">SL</ion-option>
+              <ion-option *ngIf="travelData.modeOfTravel==3">Economy Class</ion-option>
+              <ion-option *ngIf="travelData.modeOfTravel==5">Private</ion-option>
+              <ion-option *ngIf="travelData.modeOfTravel==5">Shared</ion-option>
+            </ion-select>
+          </ion-item>
+          
+          <p *ngIf="travelForm.get('class').hasError('required') && travelForm.get('class').touched" class="error-left relative">Class required!</p>
+        </div>
+        
+        <div class="main-heading mt16"><h2>Departure</h2></div>
+        <div>
+          <label>Date<span>*</span></label>
+          <ion-item class="form-field">
+            <ion-datetime formControlName="departureDate" [(ngModel)]="travelData.departureDate" displayFormat="MMM DD, YYYY" [max]="todayDate"></ion-datetime>
+          </ion-item>
+          <p *ngIf="travelForm.get('departureDate').hasError('required') && travelForm.get('departureDate').touched" class="error-left relative">Departure Date required!</p>
+        </div>
+        
+        <div>
+          <label>Station<span>*</span></label>
+          <ion-item class="form-field">
+            <ion-input type="text" formControlName="departureStation" [(ngModel)]="travelData.departureStation" ></ion-input>
+          </ion-item>
+          
+          <p *ngIf="travelForm.get('departureStation').hasError('required') && travelForm.get('departureStation').touched" class="error-left relative">Station is required!</p>
+          
+          <p *ngIf="travelForm.get('departureStation').hasError('minlength') && travelForm.get('departureStation').touched"  class="error-left relative">Station must be atleast 3 letter!</p>
+        </div>
+        <div>
+          <label>Check In Time<span>*</span></label>
+          <ion-item class="form-field">
+            <ion-datetime displayFormat="HH:mm A" formControlName="departureTime" [(ngModel)]="travelData.departureTime" pickerFormat="h mm A"></ion-datetime>
+          </ion-item>
+          <p *ngIf="travelForm.get('departureTime').hasError('required') && travelForm.get('departureTime').touched" class="error-left relative">CheckIn Time  required!</p>
+        </div>
+        
+        <div class="main-heading mt16"><h2>Arrival</h2></div>
+        
+        <div>
+          <label>Date</label>
+          <ion-item class="form-field">
+            <ion-datetime formControlName="arrivalDate" [(ngModel)]="travelData.arrivalDate" displayFormat="MMM DD, YYYY" [min]="travelData.departureDate" [max]="todayDate"></ion-datetime>
+          </ion-item>
+          <p *ngIf="travelForm.get('arrivalDate').hasError('required') && travelForm.get('arrivalDate').touched" class="error-left relative">Arrival Date required!</p>
+        </div>
+        
+        <div>
+          <label>Station<span>*</span></label>
+          <ion-item class="form-field">
+            <ion-input type="text" formControlName="arrivalStation" [(ngModel)]="travelData.arrivalStation" ></ion-input>
+          </ion-item>
+          
+          <p *ngIf="travelForm.get('arrivalStation').hasError('required') && travelForm.get('arrivalStation').touched" class="error-left relative">Station is required!</p>
+          
+          <p *ngIf="travelForm.get('arrivalStation').hasError('minlength') && travelForm.get('arrivalStation').touched"  class="error-left relative">Station must be atleast 3 letter!</p>
+        </div>
+        
+        <div>
+          <label>Check Out Time</label>
+          <ion-item class="form-field">
+            <ion-datetime displayFormat="HH:mm A" formControlName="arrivalTime" [(ngModel)]="travelData.arrivalTime" pickerFormat="h mm A"></ion-datetime>
+          </ion-item>
+          <p *ngIf="travelForm.get('arrivalTime').hasError('required') && travelForm.get('arrivalTime').touched" class="error-left relative">Arrival Time  is required!</p>
+        </div>
+        
+        
+        <div class="main-heading mt16"><h2>More Information</h2></div>
+        
+        <div>
+          <label>Detail Ticket No<span>*</span></label>
+          <ion-item class="form-field">
+            <ion-input type="text" formControlName="ticketNo" [(ngModel)]="travelData.ticketNo" ></ion-input>
+          </ion-item>
+          
+          <p *ngIf="travelForm.get('ticketNo').hasError('required') && travelForm.get('ticketNo').touched" class="error-left relative">Ticket No is required!</p>
+          
+          <p *ngIf="travelForm.get('ticketNo').hasError('minlength') && travelForm.get('ticketNo').touched"  class="error-left relative">Ticket No must be atleast 3 letter!</p>
+        </div>
+        
+        <div>
+          <label>Amount<span>*</span></label>
+          <ion-item  class="form-field">
+            <ion-input type="number" formControlName="amount" [(ngModel)]="travelData.amount" ></ion-input>
+          </ion-item>
+          <p *ngIf="travelForm.get('amount').hasError('required') && travelForm.get('amount').touched" class="error-left relative">Amount  is required!</p>
+          
+          <p *ngIf="travelForm.get('amount').hasError('minlength') && travelForm.get('amount').touched"  class="error-left relative">Amount must be atleast 2 letter!</p>
+        </div>
+        
+        <div>
+          <label>Tax Amount</label>
+          <ion-item class="form-field">
+            <ion-input type="number" formControlName="tax" [(ngModel)]="travelData.tax"></ion-input>
+          </ion-item>
+          <p *ngIf="travelForm.get('tax').hasError('required') && travelForm.get('tax').touched" class="error-left relative">Tax is required!</p>
+        </div>
+        
+      </div>
+    </div>
+    
+  </form>
+  
+  
+  
+  <form *ngIf="outstationType == 2" [formGroup]="hotelForm">
+    <div class="cs-form m16">
+      <div>
+        <label>City</label>
+        <ion-item class="form-field">
+          <ion-input type="text" formControlName="city" [(ngModel)]="hotelData.city"></ion-input>
+        </ion-item>
+        
+        <p *ngIf="hotelForm.get('city').hasError('required') && hotelForm.get('city').touched" class="error-left relative">City  is required!</p>
+        
+        <p *ngIf="hotelForm.get('city').hasError('minlength') && hotelForm.get('city').touched"  class="error-left relative">City must be atleast 3 letter!</p>
+        
+      </div>
+      
+      <div>
+        <label>Check In Date</label>
+        <ion-item class="form-field">
+          <ion-datetime displayFormat="MMM DD, YYYY" formControlName="checkInDate" [(ngModel)]="hotelData.checkInDate" [max]="todayDate"></ion-datetime>
+        </ion-item>
+        
+        <p *ngIf="hotelForm.get('checkInDate').hasError('required') && hotelForm.get('checkInDate').touched" class="error-left relative">Check In Date  is required!</p>
+      </div>
+      
+      <div>
+        <label>Check Out Date</label>
+        <ion-item class="form-field">
+          <ion-datetime displayFormat="MMM DD, YYYY" formControlName="checkOutDate" [(ngModel)]="hotelData.checkOutDate" [min]="hotelData.checkInDate" [max]='todayDate'></ion-datetime>
+        </ion-item>
+        
+        <p *ngIf="hotelForm.get('checkOutDate').hasError('required') && hotelForm.get('checkOutDate').touched" class="error-left relative">Check Out Date  is required!</p>
+      </div>
+      
+      <div>
+        <label>Hotel Name</label>
+        <ion-item class="form-field">
+          <ion-input type="text" formControlName="hotelName" [(ngModel)]="hotelData.hotelName"  ></ion-input>
+        </ion-item>
+        
+        <p *ngIf="hotelForm.get('hotelName').hasError('required') && hotelForm.get('hotelName').touched" class="error-left relative">Hotel Name  is required!</p>
+        
+        <p *ngIf="hotelForm.get('hotelName').hasError('minlength') && hotelForm.get('hotelName').touched"  class="error-left relative">Hotel Name must be atleast 3 letter!</p>
+        
+      </div>
+      
+      <div>
+        <label>Amount</label>
+        <ion-item class="form-field">
+          <ion-input type="number" formControlName="billAmount" [(ngModel)]="hotelData.billAmount"  ></ion-input>
+        </ion-item>
+        
+        <p *ngIf="hotelForm.get('billAmount').hasError('required') && hotelForm.get('billAmount').touched" class="error-left relative">Amount  is required!</p>
+        
+        <p *ngIf="hotelForm.get('billAmount').hasError('minlength') && hotelForm.get('billAmount').touched"  class="error-left relative">Amount must be atleast 2 letter!</p>
+      </div>
+      
+      <div>
+        <label>Tax Amount</label>
+        <ion-item class="form-field">
+          <ion-input type="number" formControlName="tax" [(ngModel)]="hotelData.tax" ></ion-input>
+        </ion-item>
+        <p *ngIf="hotelForm.get('tax').hasError('required') && hotelForm.get('tax').touched" class="error-left relative">Tax is required!</p>
+      </div>
+      
+      <div>
+        <label>Remark</label>
+        <ion-item class="form-field">
+          <ion-textarea formControlName="remarks" [(ngModel)]="hotelData.remarks"></ion-textarea>
+        </ion-item>
+      </div>
+    </div>
+  </form>
+  
+  
+  <form *ngIf="outstationType == 3" [formGroup]="foodForm">
+    
+    <div  class="third step-2 ul-clear">
+      <div class="cs-form m16">
+        <div>
+          <label>City</label>
+          <ion-item class="form-field">
+            <ion-input type="text" formControlName="city" [(ngModel)]="foodData.city" ></ion-input>
+          </ion-item>
+          
+          <p *ngIf="foodForm.get('city').hasError('required') && foodForm.get('city').touched" class="error-left relative">City is required!</p>
+          
+          <p *ngIf="foodForm.get('city').hasError('minlength') && foodForm.get('city').touched"  class="error-left relative">City must be atleast 3 letter!</p>
+        </div>
+        
+        <div>
+          <label>Date</label>
+          <ion-item class="form-field">
+            <ion-datetime formControlName="date" [(ngModel)]="foodData.date" displayFormat="MMM DD, YYYY" [max]="todayDate"></ion-datetime>
+          </ion-item>
+          <p *ngIf="foodForm.get('date').hasError('required') && foodForm.get('date').touched" class="error-left relative">Date is required!</p>
+        </div>
+        
+        
+        <div>
+          <label>Amount</label>
+          <ion-item class="form-field">
+            <ion-input type="number" formControlName="billAmount" [(ngModel)]="foodData.billAmount"  ></ion-input>
+          </ion-item>
+          
+          <p *ngIf="foodForm.get('billAmount').hasError('required') && foodForm.get('billAmount').touched" class="error-left relative">Amount  is required!</p>
+          
+          <p *ngIf="foodForm.get('billAmount').hasError('minlength') && foodForm.get('billAmount').touched"  class="error-left relative">Amount must be atleast 2 letter!</p>
+        </div>
+        
+        
+        <div>
+          <label>Tax Amount</label>
+          <ion-item  class="form-field">
+            <ion-input type="number" formControlName="tax" [(ngModel)]="foodData.tax"></ion-input>
+          </ion-item>
+        </div>
+        
+        
+        <div>
+          <label>Remark</label>
+          <ion-item class="form-field">
+            <ion-textarea formControlName="remarks" [(ngModel)]="foodData.remarks"></ion-textarea>
+          </ion-item>
+        </div>
+      </div>
+    </div>
+  </form>
+  
+  
+  
+  <form *ngIf="outstationType == 4" [formGroup]="convenceForm">
+    
+    <div class="four step-2 ul-clear">
+      <div class="cs-form m16">
+        
+        <div>
+          <label>Mode Of Travel</label>
+          <ion-item class="form-field">
+            <ion-select name="modeOfTravel" formControlName="modeOfTravel" [(ngModel)]="localData.modeOfTravel"  (ngModelChange)="checkValidLocalFare()" >
+              <ion-option *ngFor="let row of modeLocalTravelArr" [value]="row.typeId">{{row.name}}</ion-option>
+            </ion-select>
+          </ion-item>
+          
+          <p *ngIf="convenceForm.get('modeOfTravel').hasError('required') && convenceForm.get('modeOfTravel').touched" class="error-left relative">Mode is required!</p>
+          
+          <p *ngIf="localFareError==1" class="error-left relative">You Are Not Allow This Travel Mode!</p>
+        </div>
+        
+        <div>
+          <label>Date</label>
+          <ion-item class="form-field">
+            <ion-datetime formControlName="date" [(ngModel)]="localData.date" displayFormat="MMM DD, YYYY" [max]="todayDate"></ion-datetime>
+          </ion-item>
+          
+          <p *ngIf="convenceForm.get('date').hasError('required') && convenceForm.get('date').touched" class="error-left relative">Date  is required!</p>
+        </div>
+        
+        <div>
+          <label >From</label>
+          <ion-item class="form-field">
+            <ion-input type="text" formControlName="from" [(ngModel)]="localData.from" ></ion-input>
+          </ion-item>
+          
+          <p *ngIf="convenceForm.get('from').hasError('required') && convenceForm.get('from').touched" class="error-left relative">required!</p>
+          
+          <p *ngIf="convenceForm.get('from').hasError('minlength') && convenceForm.get('from').touched"  class="error-left relative">Must be atleast 3 letter!</p>
+        </div>
+        
+        <div>
+          <label>To</label>
+          <ion-item class="form-field">
+            <ion-input type="text" formControlName="to" [(ngModel)]="localData.to" ></ion-input>
+          </ion-item>
+          
+          <p *ngIf="convenceForm.get('to').hasError('required') && convenceForm.get('to').touched" class="error-left relative">required!</p>
+          
+          <p *ngIf="convenceForm.get('to').hasError('minlength') && convenceForm.get('to').touched"  class="error-left relative">Must be atleast 3 letter!</p>
+        </div>
+        
+        <div>
+          <label>Fare</label>
+          <ion-item class="form-field">
+            <ion-input type="number" formControlName="fare" [(ngModel)]="localData.fare" ></ion-input>
+          </ion-item>
+          
+          <p *ngIf="convenceForm.get('fare').hasError('required') && convenceForm.get('fare').touched" class="error-left relative">Fare is required!</p>
+          
+          <p *ngIf="convenceForm.get('fare').hasError('minlength') && convenceForm.get('fare').touched"  class="error-left relative">Fare must be atleast 2 letter!</p>
+        </div>
+        
+      </div>
+    </div>
+  </form>
+  
+  <form *ngIf="outstationType == 5" [formGroup]="miscForm">
+    
+    <div  class="five step-2 ul-clear">
+      
+      <div class="cs-form m16">
+        <div>
+          <label>Nature Expense</label>
+          <ion-item class="form-field">
+            <ion-select name="miscActivityType" formControlName="miscActivityType" [(ngModel)]="expenseData.miscActivityType" >
+              <ion-option *ngFor="let row of miscActivityTypeArr" [value]="row.typeId">{{row.name}}</ion-option>
+            </ion-select>
+          </ion-item>
+          
+          <p *ngIf="miscForm.get('miscActivityType').hasError('required') && miscForm.get('miscActivityType').touched" class="error-left relative">Nature Expense is required!</p>
+        </div>
+        
+        
+        <div>
+          <label>Date</label>
+          <ion-item class="form-field">
+            <ion-datetime formControlName="date" [(ngModel)]="expenseData.date" displayFormat="MMM DD, YYYY" [max]="todayDate"></ion-datetime>
+          </ion-item>
+          
+          <p *ngIf="miscForm.get('date').hasError('required') && miscForm.get('date').touched" class="error-left relative">Date is required!</p>
+        </div>
+        
+        
+        <div>
+          <label>Place Of Expense</label>
+          <ion-item class="form-field">
+            <ion-input type="text" formControlName="placeOfExpense" [(ngModel)]="expenseData.placeOfExpense"></ion-input>
+          </ion-item>
+          
+          <p *ngIf="miscForm.get('placeOfExpense').hasError('required') && miscForm.get('placeOfExpense').touched" class="error-left relative">Place  is required!</p>
+          
+          <p *ngIf="miscForm.get('placeOfExpense').hasError('minlength') && miscForm.get('placeOfExpense').touched"  class="error-left relative">Place must be atleast 3 letter!</p>
+        </div>
+        
+        <div>
+          <label>Name Of Beneficiaries</label>
+          <ion-item class="form-field">
+            <ion-input type="text" formControlName="nameOfBeneficiary" [(ngModel)]="expenseData.nameOfBeneficiary" ></ion-input>
+          </ion-item>
+          
+          <p *ngIf="miscForm.get('nameOfBeneficiary').hasError('required') && miscForm.get('nameOfBeneficiary').touched" class="error-left relative">Name is required!</p>
+          
+          <p *ngIf="miscForm.get('nameOfBeneficiary').hasError('minlength') && miscForm.get('nameOfBeneficiary').touched"  class="error-left relative">Name must be atleast 3 letter!</p>
+        </div>
+        
+        <div>
+          <label>Amount</label>
+          <ion-item class="form-field">
+            <ion-input type="number" formControlName="amount" [(ngModel)]="expenseData.amount" ></ion-input>
+          </ion-item>
+          
+          <p *ngIf="miscForm.get('amount').hasError('required') && miscForm.get('amount').touched" class="error-left relative">Amount  is required!</p>
+          
+          <p *ngIf="miscForm.get('amount').hasError('minlength') && miscForm.get('amount').touched"  class="error-left relative">Amount must be atleast 2 Digit!</p>
+        </div>
+        
+        <div>
+          <label>Tax Amount</label>
+          <ion-item class="form-field">
+            <ion-label floating class="grey-clr"></ion-label>
+            <ion-input type="number" formControlName="tax" [(ngModel)]="expenseData.tax" ></ion-input>
+          </ion-item>
+          
+          <p *ngIf="miscForm.get('tax').hasError('required') && miscForm.get('tax').touched" class="error-left relative">Tax is required!</p>
+        </div>
+        
+        
+        <div>
+          <label>Remark</label>
+          <ion-item class="form-field">
+            <ion-textarea formControlName="remarks" [(ngModel)]="expenseData.remarks"></ion-textarea>
+          </ion-item>
+        </div>
+        
+      </div>
+    </div>
+  </form>
+  
+  <div class="h50"></div>
+</ion-content>
+
+
+<ion-footer padding>
+  <div class="cs-btn border-none  right-btn">
+    <button class="wp100" ion-button color="secondary" (click)="onSaveHandler()" round>Add To List</button>
+  </div>
+</ion-footer>

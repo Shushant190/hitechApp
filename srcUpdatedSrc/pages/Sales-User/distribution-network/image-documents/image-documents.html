@@ -1,0 +1,70 @@
+<ion-header class="catalogue-header">
+	<ion-navbar>
+		<ion-title>Pawan Sharma / Documents</ion-title>
+		<!-- <ion-buttons end class="login-btn">
+			<button ion-button>
+			 </button>
+		</ion-buttons> -->
+		<ion-buttons end class="login-btn" (click)="presentPopover($event)">
+				<button ion-button>
+					<img class="w4 h16" src="assets/icons/more-option-ic.svg" alt="">
+				</button>
+			</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	
+	<p class="heading-text mb0">Upload Documents</p>
+	
+	<ion-list class="sales-seltion-field m0">
+		<ion-item>
+			<ion-label>Title</ion-label>
+			<ion-select>
+				<ion-option value="f">Visiting Card</ion-option>
+				<ion-option value="m">Visiting Card</ion-option>
+			</ion-select>
+		</ion-item>
+		<ion-item style="display: none;"></ion-item>
+	</ion-list>
+	
+	<div class="heading-text mt16 mb5">
+		<h2 class="font16">Upload Picture</h2>
+	</div>
+	
+	<div class="img-uplode">
+		<ul>
+			<li>
+				<div class="outer">
+					<div class="innear">
+						<img src="assets/img/pens.svg" alt="">
+					</div>
+				</div>
+			</li>
+			<li class="add-img">
+				<label>
+					<input type="file" style="display: none;" multiple>
+					<div class="outer">
+						<div class="innear">
+							<i class="material-icons upload-ic">add</i>
+						</div>
+					</div>
+				</label>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="cs-btn border-none m32 mr0 right-btn">
+		<button ion-button class="pr30" color="secondary" round>SAVE</button>
+	</div>
+
+	<div class="img-and-text" (click)="visitingCardImage()">
+		<div class="outer">
+			<div class="innear">
+				<img src="assets/imgs/visiting-card.png" alt="">
+				<div class="subject">Visiting Card</div>
+			</div>
+		</div>
+	</div>
+	
+</ion-content>

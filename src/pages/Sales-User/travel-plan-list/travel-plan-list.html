@@ -1,0 +1,150 @@
+<ion-header class="catalogue-header bg-af-none">
+	
+	<ion-navbar>
+		<ion-title>
+			<div class="flex-tittle" *ngIf="travelPlanType==1">
+				<p>My Travel Plan</p>
+				<!-- <span class="count">{{trvelPlanLIst.length}}</span> -->
+			</div>
+			<div class="flex-tittle" *ngIf="travelPlanType==2">
+				<p>Team's Travel Plan</p>
+				<!-- <span class="count">{{trvelPlanLIst.length}}</span> -->
+			</div>
+		</ion-title>
+		<ion-buttons end class="login-btn" (click)="presentPopover($event)" *ngIf="userRole!=10">
+			<button ion-button >
+				<img class="w4 h16" src="assets/icons/more-option-ic.svg" alt="">
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+	<div class="filter-search">
+		<ion-searchbar placeholder="Search" #input [(ngModel)]="data.search" (input)="onSearchChangeHanlder()" (ionChange)="onClearSearchHandler()"></ion-searchbar>
+	</div>
+	
+	
+	<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+		<ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
+		</ion-refresher-content>
+	</ion-refresher>
+	<!-- <ion-item   *ngIf="user != 10">
+		<ion-select (ionChange)="getStatusWiseList(2,select_any.sel)" name="sel" [(ngModel)]="select_any.sel">
+			<ion-option  value="1" [selected]="true" >My Travel Plan</ion-option>
+			<ion-option  value="2" >Wating For Approvel</ion-option>
+		</ion-select>
+	</ion-item> -->
+	
+	
+	<div class="action-btn-2">
+		<!-- <div class="head-count pb15" *ngIf="travelPlanType==1">
+			My Travel Plan
+			<span class="top-counter">{{trvelPlanLIst.length}}</span>
+		</div>
+		<div class="head-count pb15" *ngIf="travelPlanType==2">
+			Team's Travel Plan
+			<span class="top-counter">{{trvelPlanLIst.length}}</span>
+		</div> -->
+		<div class="top-tab">
+			
+			<div class="cs-button"  (click)="clickEvent()" [ngClass]="statusBar == 2 ? 'active' : ''"   (click)="getStatusWiseList(2,travelPlanType)"  >  <p>Pending <span *ngIf="statusBar==2 && !isRequestInProcess" class="counter">{{trvelPlanLIst.length}}</span> </p></div>
+			
+			<div class="cs-button"  (click)="clickEvent2()" [ngClass]="statusBar == 5 ? 'active' : ''"   (click)="getStatusWiseList(5,travelPlanType)"   ><p>Approved <span *ngIf="statusBar==5 && !isRequestInProcess" class="counter">{{trvelPlanLIst.length}}</span></p></div>
+			
+			<div class="cs-button"  (click)="clickEvent3()" [ngClass]="statusBar == 6 ? 'active' : ''"  (click)="getStatusWiseList(6,travelPlanType)"  >  <p>Reject <span *ngIf="statusBar==6 && !isRequestInProcess" class="counter">{{trvelPlanLIst.length}}</span></p></div>
+			
+			<div *ngIf="travelPlanType==1" class="cs-button"  (click)="clickEvent4()" [ngClass]="statusBar == 1 ? 'active' : ''"  (click)="getStatusWiseList(1,travelPlanType)" ><p>Draft <span *ngIf="statusBar==1 && !isRequestInProcess" class="counter">{{trvelPlanLIst.length}}</span></p></div>
+			
+		</div>
+	</div>
+	
+	    <div class="mt16" *ngIf="trvelPlanLIst.length!=0">
+		
+		 <div class="list pr16 pl16" *ngFor="let list of trvelPlanLIst">
+			
+			<div class="box"  (click)="list.status == 5 ? goOnDetailPage(list.travelPlanID) : goaddPage(list.travelPlanID)" >
+				
+				<div class="heading">
+					<div class="dflex" style="align-items: flex-start;">
+						<div class="wp100">
+							<p *ngIf="travelPlanType==2" class="black-clr">{{list.userName}} </p>
+						</div>
+					</div>
+					<div class="date">{{list.createdOn |date: 'dd MMM yyyy'}}</div>
+				</div>
+				
+				<div class="cs-list mt16">
+					<div class="list-data flat-item">
+						<div class="figure padding0">
+							<ul>
+								<li>
+									<span>Travel Month</span>
+									<p *ngFor="let row of monthArr" [hidden]="row.typeId!=list.month ">{{row.name}}</p>
+								</li>
+								<li>
+									<span>Year</span>
+									<p>{{list.year}}</p>
+								</li>
+								<li class="wp100">
+									<span>Travel Budget</span>
+									<p>₹ {{list.budget}}</p>
+								</li>
+							</ul>
+
+							<ul *ngIf="list.status!=1" style="margin-top: -1px !important;">
+
+									<li>
+										<span>Travel Status</span>
+										<p *ngIf=" list.status == 5" class="complete-clr">Approved</p>
+										<p *ngIf=" list.status == 2 || list.status == 3" class="pending-clr">Pending</p>
+										<p *ngIf=" list.status == 6" class="reject-clr">Reject</p>
+									</li>
+									
+									<li>
+										<span>Sales Activity Status</span>
+										<p *ngIf="list.status == 2 || list.status == 3" class="pending-clr">Pending</p>
+											<!-- <p class="reject-clr">Reject</p>
+											<p class="complete-clr">Approved</p> -->
+									</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>	
+		  </div> 
+	    </div>
+		
+		
+		
+		<!-- <div class="nothing-here" *ngIf=" trvelPlanLIst  == '' ">
+			<div class="outer">
+				<div class="innear">
+					<img src="assets/imgs/nothing.svg" alt="">
+					<p>Nothing is here</p>
+				</div>
+			</div>
+		</div>
+		<div class="h50"></div> -->
+
+
+
+
+
+	   <ion-fab class="no-radius-btn" right bottom  (click)="scrollToTop()">
+                    <button ion-fab color="vibrant" *ngIf="show"><i class="material-icons">expand_less</i></button>
+                </ion-fab>
+
+            <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="variableForScroll == false" >
+                    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+                  </ion-infinite-scroll>
+
+
+
+
+
+
+
+
+
+	</ion-content>
+	
